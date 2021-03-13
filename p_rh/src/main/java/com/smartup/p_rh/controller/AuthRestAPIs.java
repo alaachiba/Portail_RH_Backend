@@ -82,8 +82,6 @@ public class AuthRestAPIs {
 			return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
 					HttpStatus.BAD_REQUEST);
 		}
-
-		// Creating user's account
 				User user = new User(signUpRequest.getNom(), signUpRequest.getPrenom(), signUpRequest.getMatricule(),
 						signUpRequest.getEmail(), signUpRequest.getStatus(), encoder.encode(signUpRequest.getPwd()),signUpRequest.getEmail());
 				System.out.println(encoder.encode(signUpRequest.getPwd()));

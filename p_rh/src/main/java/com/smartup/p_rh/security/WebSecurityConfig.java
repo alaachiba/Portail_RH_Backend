@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.smartup.p_rh.security.jwt.JwtAuthEntryPoint;
 import com.smartup.p_rh.security.jwt.JwtAuthTokenFilter;
 import com.smartup.p_rh.security.services.UserDetailsServiceImpl;
 
@@ -26,9 +25,6 @@ import com.smartup.p_rh.security.services.UserDetailsServiceImpl;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
-
-    @Autowired
-    private JwtAuthEntryPoint unauthorizedHandler;
 
     @Bean
     public JwtAuthTokenFilter authenticationJwtTokenFilter() {
@@ -67,10 +63,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/rest/api/**").authenticated().antMatchers("/v2/api-docs",
-				"/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger.json,"
-						, "/swagger-ui/**", "/api/auth/**").permitAll().anyRequest()
-				.authenticated();
+		http.authorizeRequests().antMatchers("/rest/api/**").authenticated()
+				.antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**",
+						"/swagger.json,", "/swagger-ui/**", "/api/auth/**")
+				.permitAll().anyRequest().authenticated();
 		http.csrf().disable();
 	}
 }
