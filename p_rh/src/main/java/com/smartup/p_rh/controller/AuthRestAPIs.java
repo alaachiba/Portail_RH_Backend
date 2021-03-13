@@ -72,7 +72,8 @@ public class AuthRestAPIs {
 	@PostMapping("/signup")
 	@ApiResponse(code = 201, message = "L'utilisateur a été créé avec succées")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
-		if (userRepository.existsByMatricule(signUpRequest.getMatricule())) {
+		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+			System.out.println(userRepository.existsByEmail(signUpRequest.getEmail()));
 			return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
 					HttpStatus.BAD_REQUEST);
 		}

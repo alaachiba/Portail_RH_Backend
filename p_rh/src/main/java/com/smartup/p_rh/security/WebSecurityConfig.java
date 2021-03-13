@@ -11,10 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.smartup.p_rh.security.jwt.JwtAuthEntryPoint;
 import com.smartup.p_rh.security.jwt.JwtAuthTokenFilter;
@@ -71,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/rest/api/**").authenticated().antMatchers("/v2/api-docs",
 				"/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger.json,"
-						, "/swagger-ui/**", "/api/auth/signin").permitAll().anyRequest()
+						, "/swagger-ui/**", "/api/auth/**").permitAll().anyRequest()
 				.authenticated();
 		http.csrf().disable();
 	}
