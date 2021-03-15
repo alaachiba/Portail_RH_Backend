@@ -40,7 +40,6 @@ public class DemandeCongeController {
 		return new ResponseEntity<DemandeCongeDTO>(demandeCongeDTO ,  HttpStatus.CREATED);
 	}
 	
-	//boucle
 	@GetMapping("/allDemandeConge")
 	@ApiOperation(value = "Afficher tous les demandes de congé", response = List.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des demandes de congé affiché avec succées"),

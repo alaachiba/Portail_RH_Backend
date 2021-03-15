@@ -30,7 +30,6 @@ public class DemAvanceController {
 	@Autowired
 	private DemAvanceServiceImp demAvanceService;
 	
-	//date
 	@PostMapping("/addDemAvance")
 	@ApiOperation(value = "Ajouter une demande d'avance sur salaire", response = DemAvanceDTO.class)
 	@ApiResponse(code = 201, message = "La demande d'avance à été envoyé avec succées")

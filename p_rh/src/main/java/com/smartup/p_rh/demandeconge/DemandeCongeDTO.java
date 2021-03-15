@@ -137,6 +137,7 @@ public class DemandeCongeDTO implements Comparable<DemandeCongeDTO> {
 	}
 
 	public void setDateDem(Date dateDem) {
+		dateDem = new Date();
 		this.dateDem = dateDem;
 	}
 

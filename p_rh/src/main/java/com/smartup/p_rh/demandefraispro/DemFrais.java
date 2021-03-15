@@ -85,6 +85,7 @@ public class DemFrais {
 
 	
 	public void setDateDem(Date dateDem) {
+		dateDem = new Date();
 		this.dateDem = dateDem;
 	}
 

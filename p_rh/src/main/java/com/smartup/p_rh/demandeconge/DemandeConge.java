@@ -148,6 +148,7 @@ public class DemandeConge {
 	
 
 	public void setDateDem(Date dateDem) {
+		dateDem = new Date();
 		this.dateDem = dateDem;
 	}
 

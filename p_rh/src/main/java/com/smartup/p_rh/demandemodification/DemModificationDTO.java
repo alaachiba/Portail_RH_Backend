@@ -76,9 +76,15 @@ public class DemModificationDTO implements Comparable<DemModificationDTO>{
 	}
 
 	public Date getDateDem() {
-		return dateDem=(new Date());
+		return dateDem;
 	}
 
+	
+
+	public void setDateDem(Date dateDem) {
+		dateDem = new Date();
+		this.dateDem = dateDem;
+	}
 
 	public Collection<DemModificationTypeDTO> getDemModificationType() {
 		return demModificationType;

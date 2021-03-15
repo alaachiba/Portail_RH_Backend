@@ -81,6 +81,13 @@ public class DemFraisDTO {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+
+	public void setDateDem(Date dateDem) {
+		dateDem = new Date();
+		this.dateDem = dateDem;
+	}
+	
 	
 	
 	

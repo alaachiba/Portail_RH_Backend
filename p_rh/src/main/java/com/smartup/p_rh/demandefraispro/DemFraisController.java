@@ -46,13 +46,11 @@ public class DemFraisController {
 		return new ResponseEntity<List<DemFraisDTO>>(HttpStatus.NO_CONTENT);
 	}
 	
-	//date
 	@PostMapping("/addDemFrais")
 	@ApiOperation(value = "Ajouter une demande des frais professionels", response = DemFraisDTO.class)
 	@ApiResponse(code = 201, message = "La demande de frais a été envoyé avec succées")
 	public ResponseEntity<DemFraisDTO> createNewDemFrais(@RequestBody DemFraisDTO demDTORequest) {
 		DemFrais demRequest = mapDemFraisDTOToDemFrais(demDTORequest);
-		System.out.println(demRequest);
 		DemFrais DemFrais = demFraisService.saveDem(demRequest);
 		DemFraisDTO DemFraisDTO = mapDemFraisToDemFraisDTO(DemFrais);
 		return new ResponseEntity<DemFraisDTO>(DemFraisDTO, HttpStatus.CREATED);
