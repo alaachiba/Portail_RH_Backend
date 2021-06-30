@@ -72,7 +72,7 @@ public class DemModificationDTO implements Comparable<DemModificationDTO>{
 	}
 
 	public void setStatusDem(String statusDem) {
-		this.statusDem = statusDem;
+		this.statusDem = "En attente";
 	}
 
 	public Date getDateDem() {

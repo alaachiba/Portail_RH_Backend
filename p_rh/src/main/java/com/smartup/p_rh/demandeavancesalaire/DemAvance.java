@@ -66,6 +66,7 @@ public class DemAvance {
 	
 
 	public void setDemAvance(Date demAvance) {
+		demAvance = new Date();
 		this.demAvance = demAvance;
 	}
 

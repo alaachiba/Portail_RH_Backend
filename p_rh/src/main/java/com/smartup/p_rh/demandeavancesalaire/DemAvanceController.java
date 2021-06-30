@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/rest/api")
+@RequestMapping("/rest/api/avanceSalaire")
 @Api(value = "Rest Controller: Demande avance sur salaire")
 public class DemAvanceController {
 

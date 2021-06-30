@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/rest/api")
+@RequestMapping("/rest/api/congeType")
 @Api(value = "Rest Controller: Types congé")
 public class DemandeCongeTypeController {
 
@@ -41,7 +41,6 @@ public class DemandeCongeTypeController {
 		return new ResponseEntity<DemandeCongeTypeDTO>(demandeCongeTypeDTO, HttpStatus.CREATED);
 	}
 
-	//boucle
 	@GetMapping("/allType")
 	@ApiOperation(value = "Afficher tous les types de congé", response = List.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des types de congé affiché avec succées"),

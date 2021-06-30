@@ -55,6 +55,7 @@ public class DemAvanceDTO {
 
 
 	public void setDemAvance(Date demAvance) {
+		demAvance = new Date();
 		this.demAvance = demAvance;
 	}
 

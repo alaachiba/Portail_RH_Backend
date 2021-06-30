@@ -23,14 +23,13 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/rest/api")
+@RequestMapping("/rest/api/modifInfo")
 @Api(value = "Rest Controller: Demande modification des informations personnelles")
 public class DemModificationController {
 
 	@Autowired
 	private DemModificationServiceImp DemModificationService;
 
-	//date
 	@PostMapping("/addDemModification")
 	@ApiOperation(value = "Ajouter une demande de modification des informations personnelles",
 	response = DemModificationDTO.class)
@@ -57,8 +56,6 @@ public class DemModificationController {
 		List<DemModification> DemModifications = DemModificationService.getAllDem();
 		
 		if (!CollectionUtils.isEmpty(DemModifications)) {
-		
-			System.out.println(DemModifications);
 			DemModifications.removeAll(Collections.singleton(null));
 			List<DemModificationDTO> DemModificationDTOs = DemModifications.stream().map(DemModification -> {
 				return mapDemModificationToDemModificationDTO(DemModification);

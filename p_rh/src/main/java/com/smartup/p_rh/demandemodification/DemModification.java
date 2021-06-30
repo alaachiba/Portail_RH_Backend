@@ -76,7 +76,7 @@ public class DemModification {
 		return statusDem;
 	}
 	public void setStatusDem(String statusDem) {
-		this.statusDem = statusDem;
+		this.statusDem = "En attente";
 	}
 	public Date getDateDem() {
 		return dateDem;

@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/rest/api")
+@RequestMapping("/rest/api/congeDem")
 @Api(value = "Rest Controller: Demande de congé")
 public class DemandeCongeController {
 	
