@@ -27,7 +27,6 @@ public class RoleController {
 	@Autowired
 	RoleServiceImpl roleService;
 	
-	//list role
 	  @GetMapping("/allRole") 
 	  @ApiOperation(value = "Afficher tous les rôles", response = List.class)
 	  @ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des rôles affiché avec succées"),

@@ -15,14 +15,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.smartup.p_rh.demandemodification.DemModificationDTO;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/rest/api/modifInfoType")
+@Api(value = "Rest Controller: Types des Demandes modification des informations personnelles")
 public class DemModificationTypeController {
 
 	@Autowired
 	private DemModificationTypeServiceImp DemModificationTypeService;
 	
 	@GetMapping("/ListDemModificationType")
+	@ApiOperation(value = "Afficher tous les types des demandes de modification des informations personnelles",
+	response = List.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des types des demandes de modification affiché avec succées"),
+			@ApiResponse(code = 204, message = "Aucun type de demande de modification touvé"), })
 	public ResponseEntity<List<DemModificationTypeDTO>> getAllDemModification() {
 		List<DemModificationType> DemModifications = DemModificationTypeService.getAlldemModif();
 		
@@ -38,6 +50,9 @@ public class DemModificationTypeController {
 	}
 	
 	@PostMapping("/addDemModificationType")
+	@ApiOperation(value = "Ajouter un type de demande de modification des informations personnelles",
+	response = DemModificationDTO.class)
+	@ApiResponse(code = 201, message = "Le type de demande de modification a été ajouté avec succées")
 	public ResponseEntity<DemModificationTypeDTO> createNewDemModification(
 			@RequestBody DemModificationTypeDTO DemModificationDTORequest) {
 		DemModificationType DemModificationRequest = mapDemModificationDTOToDemModification(DemModificationDTORequest);
