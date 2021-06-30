@@ -1,6 +1,5 @@
 package com.smartup.p_rh.demandemodification;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.smartup.p_rh.demandemodification.type.DemModificationType;
@@ -38,8 +36,9 @@ public class DemModification {
 	@JoinColumn(name= "users_login")
 	private User user;
 	
-	@OneToMany(mappedBy="demModification")
-	private Collection<DemModificationType> demModificationType;
+	@ManyToOne
+	@JoinColumn(name="demModification")
+	private DemModificationType demModificationType;
 	
 
 	public DemModification() {
@@ -81,7 +80,7 @@ public class DemModification {
 	public Date getDateDem() {
 		return dateDem;
 	}
-///
+
 	public void setDateDem(Date dateDem) {
 		dateDem = new Date();
 		this.dateDem = dateDem;
@@ -95,11 +94,13 @@ public class DemModification {
 		this.user = user;
 	}
 
-	public Collection<DemModificationType> getDemModificationType() {
+	
+
+	public DemModificationType getDemModificationType() {
 		return demModificationType;
 	}
 
-	public void setDemModificationType(Collection<DemModificationType> demModificationType) {
+	public void setDemModificationType(DemModificationType demModificationType) {
 		this.demModificationType = demModificationType;
 	}
 

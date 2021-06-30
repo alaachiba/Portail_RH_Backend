@@ -1,6 +1,5 @@
 package com.smartup.p_rh.demandemodification;
 
-import java.util.Collection;
 import java.util.Date;
 
 import com.smartup.p_rh.demandemodification.type.DemModificationTypeDTO;
@@ -27,8 +26,8 @@ public class DemModificationDTO implements Comparable<DemModificationDTO>{
 	@ApiModelProperty(notes = "Le demandeur de modification des informations personnelles")
 	private UserDTO user;
 	
-	@ApiModelProperty(notes = "Les demandes de l'employe")
-	private Collection<DemModificationTypeDTO> demModificationType;
+	@ApiModelProperty(notes = "Le type de demande")
+	private DemModificationTypeDTO demModificationType;
 
 	
 	public DemModificationDTO() {
@@ -86,11 +85,13 @@ public class DemModificationDTO implements Comparable<DemModificationDTO>{
 		this.dateDem = dateDem;
 	}
 
-	public Collection<DemModificationTypeDTO> getDemModificationType() {
+	
+
+	public DemModificationTypeDTO getDemModificationType() {
 		return demModificationType;
 	}
 
-	public void setDemModificationType(Collection<DemModificationTypeDTO> demModificationType) {
+	public void setDemModificationType(DemModificationTypeDTO demModificationType) {
 		this.demModificationType = demModificationType;
 	}
 

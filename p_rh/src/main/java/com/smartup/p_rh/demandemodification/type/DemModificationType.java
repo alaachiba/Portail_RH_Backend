@@ -5,11 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.smartup.p_rh.demandemodification.DemModification;
 
 @Entity
 @Table(name = "employee_infos_rh_dem_type")
@@ -24,11 +20,6 @@ public class DemModificationType {
 	@Column(name = "employee_infos_rh_dem_type")
 	private String type;
 	
-	
-	
-	@ManyToOne
-	@JoinColumn(name= "employee_infos_rh_dem_id")
-	private DemModification demModification;
 	
 	public DemModificationType() {
 		super();
@@ -56,13 +47,6 @@ public class DemModificationType {
 		this.type = type;
 	}
 
-	public DemModification getDemModification() {
-		return demModification;
-	}
-
-	public void setDemModification(DemModification demModification) {
-		this.demModification = demModification;
-	}
 
 	@Override
 	public String toString() {
