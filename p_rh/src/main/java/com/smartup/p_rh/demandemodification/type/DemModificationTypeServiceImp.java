@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("DemandeModificationType")
 @Transactional
-public class DemModificationServiceImp implements IdemModificationService{
+public class DemModificationTypeServiceImp implements IdemModificationTypeService{
 	
 	@Autowired
 	private DemModificationTypeRepository demModifTypeDao;

@@ -4,7 +4,7 @@ import java.util.List;
 
 
 
-public interface IdemModificationService {
+public interface IdemModificationTypeService {
 	
     public DemModificationType saveDemModif(DemModificationType DemModificationType);
 	
