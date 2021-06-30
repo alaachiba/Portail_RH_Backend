@@ -30,7 +30,7 @@ public class DemModification {
 	
 	@Column(name = "employee_infos_rh_dem_statu")
 	private String statusDem;
-	//
+	////
 	@Column(name = "employee_infos_rh_dem_date")
 	private Date dateDem;
 	
