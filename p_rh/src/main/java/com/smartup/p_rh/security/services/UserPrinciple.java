@@ -52,6 +52,8 @@ public class UserPrinciple implements UserDetails {
 			this.pwd = pwd;
 			this.authorities = authorities;
 		}
+	    
+	    
 
 
 
@@ -74,8 +76,6 @@ public class UserPrinciple implements UserDetails {
 	        		);
 	                
 	    }
-
-
 
 
 	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
@@ -220,7 +220,5 @@ public class UserPrinciple implements UserDetails {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
-	
 	
 }
