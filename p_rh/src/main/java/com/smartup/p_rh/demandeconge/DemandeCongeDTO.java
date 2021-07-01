@@ -133,7 +133,7 @@ public class DemandeCongeDTO implements Comparable<DemandeCongeDTO> {
 	}
 
 	public void setStatus(String status) {
-		this.status = status;
+		this.status = "En attente";
 	}
 
 	public Date getDateDem() {
