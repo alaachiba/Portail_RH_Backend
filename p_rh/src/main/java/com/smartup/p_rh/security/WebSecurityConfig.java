@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.smartup.p_rh.security.jwt.JwtAuthTokenFilter;
 import com.smartup.p_rh.security.services.UserDetailsServiceImpl;
@@ -64,9 +65,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/rest/api/**").authenticated()
-				.antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**",
-						"/swagger.json,", "/swagger-ui/**", "/api/auth/**")
-				.permitAll().anyRequest().authenticated();
-		http.csrf().disable();
+		.antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**",
+				"/swagger.json,", "/swagger-ui/**", "/api/auth/**")
+		.permitAll().anyRequest().authenticated().and().httpBasic().and().csrf().disable();
+
+	http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
+
 }

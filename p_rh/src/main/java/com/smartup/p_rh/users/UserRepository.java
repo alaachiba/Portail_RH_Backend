@@ -20,5 +20,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
     public Boolean existsByMatricule(Integer matricule);
     
-  //   public Boolean findByUsername(String username);
+    public Boolean existsByUsername(String username);
 }
