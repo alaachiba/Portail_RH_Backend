@@ -137,9 +137,7 @@ public class DemandeConge {
 		return status;
 	}
 
-	public void setStatus(String status) {
-		this.status = "En attente";
-	}
+	
 
 	public Date getDateDem() {
 		return dateDem;
@@ -147,8 +145,13 @@ public class DemandeConge {
 
 	
 
+	
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public void setDateDem(Date dateDem) {
-		dateDem = new Date();
 		this.dateDem = dateDem;
 	}
 

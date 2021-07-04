@@ -31,6 +31,9 @@ public class DemAvance {
 	@Column(name = "statut")
 	private String statut;
 	
+	@Column(name ="motif")
+	private String motif;
+	
 	@ManyToOne
 	@JoinColumn(name = "users_login")
 	private User user;
@@ -39,14 +42,17 @@ public class DemAvance {
 		super();
 	}
 
-
-	public DemAvance(Integer id, float montant, Date demAvance, String statut) {
+	public DemAvance(Integer id, float montant, Date demAvance, String statut, String motif) {
 		super();
 		this.id = id;
 		this.montant = montant;
 		this.demAvance = demAvance;
 		this.statut = statut;
+		this.motif = motif;
 	}
+
+
+
 
 
 
@@ -66,16 +72,17 @@ public class DemAvance {
 		this.montant = montant;
 	}
 
+	
+
 	public Date getDemAvance() {
 		return demAvance;
 	}
 
-	
 
 	public void setDemAvance(Date demAvance) {
-		demAvance = new Date();
 		this.demAvance = demAvance;
 	}
+
 
 	public User getUser() {
 		return user;
@@ -90,10 +97,29 @@ public class DemAvance {
 		return statut;
 	}
 
-
 	public void setStatut(String statut) {
-		this.statut = "En attente";
+		this.statut = statut;
 	}
 
+
+	public Integer getUserId() {
+        return user.getIdUser();
+   }
+	
+	
+	public String getMotif() {
+		return motif;
+	}
+
+	public void setMotif(String motif) {
+		this.motif = motif;
+	}
+
+	@Override
+	public String toString() {
+		return "DemAvance [id=" + id + ", montant=" + montant + ", demAvance=" + demAvance + ", statut=" + statut
+				+ ", user=" + user + ", getUserId()=" + getUserId() + "]";
+	}
+	
 	
 }

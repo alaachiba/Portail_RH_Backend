@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.smartup.p_rh.users.UserDTO;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -72,18 +70,21 @@ public class DemAvanceController {
 		return new ResponseEntity<DemAvanceDTO>(HttpStatus.NO_CONTENT);
 	}
 	
-	@GetMapping("/Mydems/{user}")
+	/*@GetMapping("/Mydems/{user}")
 	@ApiOperation(value = "Rechercher un utilisateur par son adresse mail", response = UserDTO.class)
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "L'utilisateur n'existe pas"),
 			@ApiResponse(code = 200, message = "L'utilisateur a été modifié")})
-	public ResponseEntity<DemAvanceDTO> getDemsByIdUser(@PathVariable Integer user) {
-		DemAvance demAvance = demAvanceService.findDemByIdU(user);
-		if (demAvance != null) {
-			DemAvanceDTO demAvanceDTO = mapDemAvanceToDemAvanceDTO(demAvance);
-			return new ResponseEntity<DemAvanceDTO>(demAvanceDTO, HttpStatus.OK);
+	public ResponseEntity<List<DemAvanceDTO>> getDemsByIdUser(@PathVariable Integer user) {
+		List<DemAvance> demAvances = demAvanceService.findByNameEndsWith(user);
+		if (!CollectionUtils.isEmpty(demAvances)) {
+			demAvances.removeAll(Collections.singleton(null));
+			List<DemAvanceDTO> demAvancesDtos = demAvances.stream().map(demAvance -> {
+				return mapDemAvanceToDemAvanceDTO(demAvance);
+			}).collect(Collectors.toList());
+			return new ResponseEntity<List<DemAvanceDTO>>(demAvancesDtos, HttpStatus.OK);
 		}
-		return new ResponseEntity<DemAvanceDTO>(HttpStatus.NO_CONTENT);
-	}
+		return new ResponseEntity<List<DemAvanceDTO>>(HttpStatus.NO_CONTENT);
+	}*/
 	
 	@PutMapping("/updateDem")
 	public ResponseEntity<DemAvanceDTO> updateDem(@RequestBody DemAvanceDTO demDTORequest) {

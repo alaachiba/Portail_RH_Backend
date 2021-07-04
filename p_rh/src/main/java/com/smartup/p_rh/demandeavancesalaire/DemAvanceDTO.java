@@ -21,6 +21,9 @@ public class DemAvanceDTO {
 	
 	@ApiModelProperty(notes = "Le statut de la demande")
 	private String statut;
+	
+	@ApiModelProperty(notes = "Le motif en cas de refus")
+	private String motif;
 
 	@ApiModelProperty(notes = "Le demandeur de l'avance sur salaire")
 	private User user;
@@ -30,13 +33,17 @@ public class DemAvanceDTO {
 	}
 	
 
-	public DemAvanceDTO(Integer id, float montant, Date demAvance, String statut) {
+	public DemAvanceDTO(Integer id, float montant, Date demAvance, String statut, String motif) {
 		super();
 		this.id = id;
 		this.montant = montant;
 		this.demAvance = demAvance;
 		this.statut = statut;
+		this.motif = motif;
 	}
+
+
+
 
 
 
@@ -62,7 +69,6 @@ public class DemAvanceDTO {
 
 
 	public void setDemAvance(Date demAvance) {
-		demAvance = new Date();
 		this.demAvance = demAvance;
 	}
 
@@ -81,7 +87,17 @@ public class DemAvanceDTO {
 
 
 	public void setStatut(String statut) {
-		this.statut = "En attente";
+		this.statut = statut;
+	}
+
+
+	public String getMotif() {
+		return motif;
+	}
+
+
+	public void setMotif(String motif) {
+		this.motif = motif;
 	}
 	
 	

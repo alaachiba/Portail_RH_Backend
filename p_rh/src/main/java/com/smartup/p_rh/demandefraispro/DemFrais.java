@@ -30,6 +30,9 @@ public class DemFrais {
 	@Column(name = "employee_frais_dem_date")
 	private Date dateDem;
 	
+	@Column(name = "motif")
+	private String motif;
+	
 	@ManyToOne
 	@JoinColumn(name = "users_login")
 	private User user;
@@ -38,13 +41,16 @@ public class DemFrais {
 		super();
 	}
 
-	public DemFrais(Integer id, float montant, Date dateMission, Date dateDem) {
+	public DemFrais(Integer id, float montant, Date dateMission, Date dateDem, String motif) {
 		super();
 		this.id = id;
 		this.montant = montant;
 		this.dateMission = dateMission;
 		this.dateDem = dateDem;
+		this.motif = motif;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -83,10 +89,17 @@ public class DemFrais {
 		this.user = user;
 	}
 
-	
 	public void setDateDem(Date dateDem) {
-		dateDem = new Date();
 		this.dateDem = dateDem;
+	}
+
+	
+	public String getMotif() {
+		return motif;
+	}
+
+	public void setMotif(String motif) {
+		this.motif = motif;
 	}
 
 	@Override

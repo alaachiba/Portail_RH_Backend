@@ -70,22 +70,17 @@ public class DemModificationDTO implements Comparable<DemModificationDTO>{
 		return statusDem;
 	}
 
-	public void setStatusDem(String statusDem) {
-		this.statusDem = "En attente";
-	}
-
 	public Date getDateDem() {
 		return dateDem;
 	}
 
-	
-
-	public void setDateDem(Date dateDem) {
-		dateDem = new Date();
-		this.dateDem = dateDem;
+	public void setStatusDem(String statusDem) {
+		this.statusDem = statusDem;
 	}
 
-	
+	public void setDateDem(Date dateDem) {
+		this.dateDem = dateDem;
+	}
 
 	public DemModificationTypeDTO getDemModificationType() {
 		return demModificationType;

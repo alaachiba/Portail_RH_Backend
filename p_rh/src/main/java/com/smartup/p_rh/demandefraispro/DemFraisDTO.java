@@ -23,6 +23,9 @@ public class DemFraisDTO {
 	@ApiModelProperty(notes = "La date de la demande de frais profetionnels")
 	private Date dateDem;
 	
+	@ApiModelProperty(notes = "Le motif en cas de refus")
+	private String motif;
+	
 	@ApiModelProperty(notes = "Le demandeur des frais profetionnels")
 	private User user;
 	
@@ -33,13 +36,17 @@ public class DemFraisDTO {
 	}
 	
 
-	public DemFraisDTO(Integer id, float montant, Date dateMission, Date dateDem) {
+	public DemFraisDTO(Integer id, float montant, Date dateMission, Date dateDem, String motif) {
 		super();
 		this.id = id;
 		this.montant = montant;
 		this.dateMission = dateMission;
 		this.dateDem = dateDem;
+		this.motif = motif;
 	}
+
+
+
 
 
 
@@ -84,8 +91,17 @@ public class DemFraisDTO {
 
 
 	public void setDateDem(Date dateDem) {
-		dateDem = new Date();
 		this.dateDem = dateDem;
+	}
+
+
+	public String getMotif() {
+		return motif;
+	}
+
+
+	public void setMotif(String motif) {
+		this.motif = motif;
 	}
 	
 	

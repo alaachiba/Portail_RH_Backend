@@ -46,4 +46,8 @@ public class DemAvanceServiceImp implements IDemAvanceService {
 		return demAvanceDao.save(demandeAvance);
 	}
 
+	@Override
+	public List<DemAvance> findByuser(Integer user) {
+		return demAvanceDao.findByuser(user);
+	}
 }

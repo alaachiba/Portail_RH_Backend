@@ -15,5 +15,9 @@ public interface IDemAvanceService {
 	public DemAvance findDemByIdU(Integer user);
 	
 	public DemAvance updateDem(DemAvance demandeAvance);
+	
+	List<DemAvance> findByuser(Integer user);
+	
+	//List<DemAvance> findByNameEndsWith(Integer user);
 
 }
