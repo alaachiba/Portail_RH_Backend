@@ -27,7 +27,10 @@ public class DemAvance {
 
 	@Column(name = "employee_av_salaire_dem_date")
 	private Date demAvance;
-
+	
+	@Column(name = "statut")
+	private String statut;
+	
 	@ManyToOne
 	@JoinColumn(name = "users_login")
 	private User user;
@@ -36,12 +39,16 @@ public class DemAvance {
 		super();
 	}
 
-	public DemAvance(Integer id, float montant, Date demAvance) {
+
+	public DemAvance(Integer id, float montant, Date demAvance, String statut) {
 		super();
 		this.id = id;
 		this.montant = montant;
 		this.demAvance = demAvance;
+		this.statut = statut;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -78,4 +85,15 @@ public class DemAvance {
 		this.user = user;
 	}
 
+
+	public String getStatut() {
+		return statut;
+	}
+
+
+	public void setStatut(String statut) {
+		this.statut = "En attente";
+	}
+
+	
 }

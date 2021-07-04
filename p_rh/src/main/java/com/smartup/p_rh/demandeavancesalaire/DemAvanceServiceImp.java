@@ -20,7 +20,7 @@ public class DemAvanceServiceImp implements IDemAvanceService {
 
 	@Override
 	public boolean checkIfIdExists(Integer id) {
-		return false;
+		return demAvanceDao.existsById(id);
 	}
 
 	@Override
@@ -33,6 +33,17 @@ public class DemAvanceServiceImp implements IDemAvanceService {
 	@Override
 	public List<DemAvance> getAllDemAvance() {
 		return demAvanceDao.findAll();
+	}
+
+
+	@Override
+	public DemAvance findDemByIdU(Integer user) {
+		return demAvanceDao.findDemById(user);
+	}
+
+	@Override
+	public DemAvance updateDem(DemAvance demandeAvance) {
+		return demAvanceDao.save(demandeAvance);
 	}
 
 }

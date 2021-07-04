@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +26,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/rest/api/modifInfo")
+@CrossOrigin(origins = "*")
 @Api(value = "Rest Controller: Demande modification des informations personnelles")
 public class DemModificationController {
 
@@ -72,6 +75,20 @@ public class DemModificationController {
 	public ResponseEntity<String> deleteDemModification(@PathVariable Integer id) {
 		DemModificationService.deleteDem(id);
 		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+	}
+	
+	@PutMapping("/updateDem")
+	public ResponseEntity<DemModificationDTO> updateDem(@RequestBody DemModificationDTO demDTORequest) {
+		DemModification demRequest = mapDemModificationDTOToDemModification(demDTORequest);
+		if (!DemModificationService.checkIfIdExists(demDTORequest.getId())) {
+			return new ResponseEntity<DemModificationDTO>(HttpStatus.NOT_FOUND);
+		}
+		DemModification demModif = DemModificationService.updateDem(demRequest);
+		if (demModif != null) {
+			DemModificationDTO demandeDTO = mapDemModificationToDemModificationDTO(demModif);
+			return new ResponseEntity<DemModificationDTO>(demandeDTO, HttpStatus.OK);
+		}
+		return new ResponseEntity<DemModificationDTO>(HttpStatus.NOT_MODIFIED);
 	}
 
 	private DemModificationDTO mapDemModificationToDemModificationDTO(DemModification DemModification) {

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DemAvanceRepository extends JpaRepository<DemAvance, Integer> {
 	
-	
+	public DemAvance findDemById(Integer user);
 	
 
 }

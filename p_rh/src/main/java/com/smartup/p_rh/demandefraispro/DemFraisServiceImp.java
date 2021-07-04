@@ -30,10 +30,12 @@ public class DemFraisServiceImp  implements IDemFraisService {
 		
 	}
 
+	public boolean checkIfIdExists(Integer id) {
+		return demFraisDao.existsById(id);
+	}
 
-	/*
-	 * public List<DemFrais> getAllDemForThisUser(Integer id) { return
-	 * demFraisDao.findById(id); }
-	 */
+	public DemFrais updateDem(DemFrais demRequest) {
+		return demFraisDao.save(demRequest);
+	}
 
 }

@@ -64,7 +64,7 @@ public class UserController {
 	@GetMapping("/searchByEmail/{email}")
 	@ApiOperation(value = "Rechercher un utilisateur par son adresse mail", response = UserDTO.class)
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "L'utilisateur n'existe pas"),
-			@ApiResponse(code = 200, message = "L'utilisateur a été modifié")})
+			@ApiResponse(code = 200, message = "L'utilisateur a été trouvé")})
 	public ResponseEntity<UserDTO> searchUserByEmail(@PathVariable String email) {
 		User user = userService.findUserByEmail(email);
 		if (user != null) {

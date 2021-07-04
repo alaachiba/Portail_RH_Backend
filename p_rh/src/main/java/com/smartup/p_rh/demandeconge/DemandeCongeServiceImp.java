@@ -27,6 +27,14 @@ public class DemandeCongeServiceImp implements IDemandeCongeService {
 	public void deleteDemConge(Integer id) {
 		demandeCongeRepository.deleteById(id);
 	}
+
+	public DemandeConge updateDem(DemandeConge demRequest) {
+		return demandeCongeRepository.save(demRequest);
+	}
+
+	public boolean checkIfIdExists(Integer id) {
+		return demandeCongeRepository.existsById(id);
+	}
 		
 
 }

@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +26,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/rest/api/congeDem")
+@CrossOrigin(origins = "*")
 @Api(value = "Rest Controller: Demande de congé")
 public class DemandeCongeController {
 	
@@ -62,6 +65,20 @@ public class DemandeCongeController {
 	public ResponseEntity<DemandeCongeDTO> deleteDemConge(@PathVariable Integer id){
 		CongeService.deleteDemConge(id);
 		return new ResponseEntity<DemandeCongeDTO>(HttpStatus.NO_CONTENT);
+	}
+	
+	@PutMapping("/updateDem")
+	public ResponseEntity<DemandeCongeDTO> updateDem(@RequestBody DemandeCongeDTO demDTORequest) {
+		DemandeConge demRequest = mapDemandeCongeDTOToDemandeConge(demDTORequest);
+		if (!CongeService.checkIfIdExists(demDTORequest.getId())) {
+			return new ResponseEntity<DemandeCongeDTO>(HttpStatus.NOT_FOUND);
+		}
+		DemandeConge demandeConge = CongeService.updateDem(demRequest);
+		if (demandeConge != null) {
+			DemandeCongeDTO demandeDTO = mapDemandeCongeToDemandeCongeDTO(demandeConge);
+			return new ResponseEntity<DemandeCongeDTO>(demandeDTO, HttpStatus.OK);
+		}
+		return new ResponseEntity<DemandeCongeDTO>(HttpStatus.NOT_MODIFIED);
 	}
 	
 	private DemandeCongeDTO mapDemandeCongeToDemandeCongeDTO(DemandeConge demandeConge) {

@@ -30,4 +30,12 @@ public class DemModificationServiceImp implements IDemModificationService {
 		return demModificationDao.findAll();
 	}
 
+	public boolean checkIfIdExists(Integer id) {
+		return demModificationDao.existsById(id);
+	}
+
+	public DemModification updateDem(DemModification demRequest) {
+		return demModificationDao.save(demRequest);
+	}
+
 }

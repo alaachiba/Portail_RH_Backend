@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,8 +25,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/rest/api/fraisDem")
+@CrossOrigin(origins = "*")
 @Api(value = "Rest Controller: Demande de frais professionels")
 public class DemFraisController {
 	
@@ -66,12 +67,27 @@ public class DemFraisController {
 		return new ResponseEntity<DemFraisDTO>(HttpStatus.NO_CONTENT);
 	}
 	
+	@PutMapping("/updateDem")
+	public ResponseEntity<DemFraisDTO> updateDem(@RequestBody DemFraisDTO demDTORequest) {
+		DemFrais demRequest = mapDemFraisDTOToDemFrais(demDTORequest);
+		if (!demFraisService.checkIfIdExists(demDTORequest.getId())) {
+			return new ResponseEntity<DemFraisDTO>(HttpStatus.NOT_FOUND);
+		}
+		DemFrais demandeFrais = demFraisService.updateDem(demRequest);
+		if (demandeFrais != null) {
+			DemFraisDTO demandeDTO = mapDemFraisToDemFraisDTO(demandeFrais);
+			return new ResponseEntity<DemFraisDTO>(demandeDTO, HttpStatus.OK);
+		}
+		return new ResponseEntity<DemFraisDTO>(HttpStatus.NOT_MODIFIED);
+	}
+
+	
 	private DemFraisDTO mapDemFraisToDemFraisDTO(DemFrais DemFrais) {
 		ModelMapper mapper = new ModelMapper();
 		DemFraisDTO DemFraisDTO = mapper.map(DemFrais, DemFraisDTO.class);
 		return DemFraisDTO;
 	}
-
+	
 	private DemFrais mapDemFraisDTOToDemFrais(DemFraisDTO demDTORequest) {
 		ModelMapper mapper = new ModelMapper();
 		DemFrais DemFrais = mapper.map(demDTORequest, DemFrais.class);

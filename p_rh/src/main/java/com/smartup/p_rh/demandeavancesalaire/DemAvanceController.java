@@ -9,13 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.smartup.p_rh.users.UserDTO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +28,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/rest/api/avanceSalaire")
+@CrossOrigin(origins = "*")
 @Api(value = "Rest Controller: Demande avance sur salaire")
 public class DemAvanceController {
 
@@ -65,6 +70,33 @@ public class DemAvanceController {
 	public ResponseEntity<DemAvanceDTO> deleteDemAvance(@PathVariable Integer id) {
 		demAvanceService.deleteDemAvance(id);
 		return new ResponseEntity<DemAvanceDTO>(HttpStatus.NO_CONTENT);
+	}
+	
+	@GetMapping("/Mydems/{user}")
+	@ApiOperation(value = "Rechercher un utilisateur par son adresse mail", response = UserDTO.class)
+	@ApiResponses(value = { @ApiResponse(code = 404, message = "L'utilisateur n'existe pas"),
+			@ApiResponse(code = 200, message = "L'utilisateur a été modifié")})
+	public ResponseEntity<DemAvanceDTO> getDemsByIdUser(@PathVariable Integer user) {
+		DemAvance demAvance = demAvanceService.findDemByIdU(user);
+		if (demAvance != null) {
+			DemAvanceDTO demAvanceDTO = mapDemAvanceToDemAvanceDTO(demAvance);
+			return new ResponseEntity<DemAvanceDTO>(demAvanceDTO, HttpStatus.OK);
+		}
+		return new ResponseEntity<DemAvanceDTO>(HttpStatus.NO_CONTENT);
+	}
+	
+	@PutMapping("/updateDem")
+	public ResponseEntity<DemAvanceDTO> updateDem(@RequestBody DemAvanceDTO demDTORequest) {
+		DemAvance demRequest = mapDemAvanceDTOToDemAvance(demDTORequest);
+		if (!demAvanceService.checkIfIdExists(demDTORequest.getId())) {
+			return new ResponseEntity<DemAvanceDTO>(HttpStatus.NOT_FOUND);
+		}
+		DemAvance demandeAvance = demAvanceService.updateDem(demRequest);
+		if (demandeAvance != null) {
+			DemAvanceDTO demandeDTO = mapDemAvanceToDemAvanceDTO(demandeAvance);
+			return new ResponseEntity<DemAvanceDTO>(demandeDTO, HttpStatus.OK);
+		}
+		return new ResponseEntity<DemAvanceDTO>(HttpStatus.NOT_MODIFIED);
 	}
 	
 	private DemAvanceDTO mapDemAvanceToDemAvanceDTO(DemAvance demAvance) {

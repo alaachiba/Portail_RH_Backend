@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/rest/api/modifInfoType")
+@CrossOrigin(origins = "*")
 @Api(value = "Rest Controller: Types des Demandes modification des informations personnelles")
 public class DemModificationTypeController {
 
