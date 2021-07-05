@@ -32,9 +32,13 @@ public class DemModification {
 	@Column(name = "employee_infos_rh_dem_date")
 	private Date dateDem;
 	
+	@Column(name = "motif")
+	private String motif;
+	
 	@ManyToOne
 	@JoinColumn(name= "users_login")
 	private User user;
+
 	
 	@ManyToOne
 	@JoinColumn(name="demModification")
@@ -45,13 +49,17 @@ public class DemModification {
 		super();
 	}
 	
-	public DemModification(String description, String statusDem, Date dateDem, Integer id) {
+
+	public DemModification(Integer id, String description, String statusDem, Date dateDem, String motif) {
 		super();
+		this.id = id;
 		this.description = description;
 		this.statusDem = statusDem;
 		this.dateDem = dateDem;
-		this.id = id;
+		this.motif = motif;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -104,6 +112,18 @@ public class DemModification {
 	public void setDemModificationType(DemModificationType demModificationType) {
 		this.demModificationType = demModificationType;
 	}
+	
+	
+
+	public String getMotif() {
+		return motif;
+	}
+
+
+	public void setMotif(String motif) {
+		this.motif = motif;
+	}
+
 
 	@Override
 	public String toString() {

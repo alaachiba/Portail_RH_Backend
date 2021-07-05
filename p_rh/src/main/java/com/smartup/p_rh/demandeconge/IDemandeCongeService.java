@@ -10,5 +10,7 @@ public interface IDemandeCongeService {
 	public List<DemandeConge> getAllDemConge();
 		
 	public void deleteDemConge(Integer id);
+	
+	public List<DemandeConge> findByuserEmail(String email);
 
 }

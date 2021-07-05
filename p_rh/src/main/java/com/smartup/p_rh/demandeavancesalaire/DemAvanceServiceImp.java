@@ -50,4 +50,9 @@ public class DemAvanceServiceImp implements IDemAvanceService {
 	public List<DemAvance> findByuser(Integer user) {
 		return demAvanceDao.findByuser(user);
 	}
+	
+	@Override
+	public List<DemAvance> findByuserEmail(String email) {
+		return demAvanceDao.findDemByEmail(email);
+	}
 }

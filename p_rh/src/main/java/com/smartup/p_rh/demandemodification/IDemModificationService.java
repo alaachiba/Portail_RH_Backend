@@ -11,4 +11,5 @@ public DemModification saveDem(DemModification demModification);
 	
 	public List<DemModification> getAllDem();
 
+	public List<DemModification> findByuserEmail(String email);
 }

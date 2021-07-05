@@ -35,6 +35,11 @@ public class DemandeCongeServiceImp implements IDemandeCongeService {
 	public boolean checkIfIdExists(Integer id) {
 		return demandeCongeRepository.existsById(id);
 	}
+
+	@Override
+	public List<DemandeConge> findByuserEmail(String email) {
+		return demandeCongeRepository.findDemByEmail(email);
+	}
 		
 
 }

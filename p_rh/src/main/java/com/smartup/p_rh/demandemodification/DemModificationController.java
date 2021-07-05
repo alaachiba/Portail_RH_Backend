@@ -91,6 +91,22 @@ public class DemModificationController {
 		return new ResponseEntity<DemModificationDTO>(HttpStatus.NOT_MODIFIED);
 	}
 
+	@PostMapping("/myDemandes/{email}")
+	@ApiOperation(value = "Afficher tous les demandes d'avance sur salaire", response = List.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des demandes affiché avec succées"),
+				@ApiResponse(code = 204, message = "Aucune demande pour avance sur salaire touvé"), })
+	public ResponseEntity<List<DemModificationDTO>> getAllDemandeByUser(@PathVariable String email) {
+		List<DemModification> demModif = DemModificationService.findByuserEmail(email);
+		if (!CollectionUtils.isEmpty(demModif)) {
+			demModif.removeAll(Collections.singleton(null));
+			List<DemModificationDTO> demDtos = demModif.stream().map(dem -> {
+					return mapDemModificationToDemModificationDTO(dem);
+			}).collect(Collectors.toList());
+			return new ResponseEntity<List<DemModificationDTO>>(demDtos, HttpStatus.OK);
+		}
+		return new ResponseEntity<List<DemModificationDTO>>(HttpStatus.NO_CONTENT);
+	}
+	
 	private DemModificationDTO mapDemModificationToDemModificationDTO(DemModification DemModification) {
 		ModelMapper mapper = new ModelMapper();
 		DemModificationDTO DemModificationDTO = mapper.map(DemModification, DemModificationDTO.class);

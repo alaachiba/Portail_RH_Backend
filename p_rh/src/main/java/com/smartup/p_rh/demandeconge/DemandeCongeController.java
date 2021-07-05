@@ -81,6 +81,22 @@ public class DemandeCongeController {
 		return new ResponseEntity<DemandeCongeDTO>(HttpStatus.NOT_MODIFIED);
 	}
 	
+	@PostMapping("/myDemandes/{email}")
+	@ApiOperation(value = "Afficher tous les demandes d'avance sur salaire", response = List.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des demandes affiché avec succées"),
+				@ApiResponse(code = 204, message = "Aucune demande pour avance sur salaire touvé"), })
+	public ResponseEntity<List<DemandeCongeDTO>> getAllDemandeByUser(@PathVariable String email) {
+		List<DemandeConge> demConge = CongeService.findByuserEmail(email);
+		if (!CollectionUtils.isEmpty(demConge)) {
+			demConge.removeAll(Collections.singleton(null));
+			List<DemandeCongeDTO> demDtos = demConge.stream().map(dem -> {
+					return mapDemandeCongeToDemandeCongeDTO(dem);
+			}).collect(Collectors.toList());
+			return new ResponseEntity<List<DemandeCongeDTO>>(demDtos, HttpStatus.OK);
+		}
+		return new ResponseEntity<List<DemandeCongeDTO>>(HttpStatus.NO_CONTENT);
+	}
+	
 	private DemandeCongeDTO mapDemandeCongeToDemandeCongeDTO(DemandeConge demandeConge) {
 		ModelMapper mapper = new ModelMapper();
 		DemandeCongeDTO demandeCongeDTO = mapper.map(demandeConge , DemandeCongeDTO.class);

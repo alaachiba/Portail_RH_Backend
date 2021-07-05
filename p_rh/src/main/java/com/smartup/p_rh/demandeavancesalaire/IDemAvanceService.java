@@ -18,6 +18,6 @@ public interface IDemAvanceService {
 	
 	List<DemAvance> findByuser(Integer user);
 	
-	//List<DemAvance> findByNameEndsWith(Integer user);
+	public List<DemAvance> findByuserEmail(String email);
 
 }

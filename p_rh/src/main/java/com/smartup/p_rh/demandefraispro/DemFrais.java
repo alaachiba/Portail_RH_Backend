@@ -33,6 +33,9 @@ public class DemFrais {
 	@Column(name = "motif")
 	private String motif;
 	
+	@Column(name="statut")
+	private String statut;
+	
 	@ManyToOne
 	@JoinColumn(name = "users_login")
 	private User user;
@@ -41,14 +44,18 @@ public class DemFrais {
 		super();
 	}
 
-	public DemFrais(Integer id, float montant, Date dateMission, Date dateDem, String motif) {
+	
+	public DemFrais(Integer id, float montant, Date dateMission, Date dateDem, String motif, String statut) {
 		super();
 		this.id = id;
 		this.montant = montant;
 		this.dateMission = dateMission;
 		this.dateDem = dateDem;
 		this.motif = motif;
+		this.statut = statut;
 	}
+
+
 
 
 
@@ -101,6 +108,18 @@ public class DemFrais {
 	public void setMotif(String motif) {
 		this.motif = motif;
 	}
+
+	
+	
+	public String getStatut() {
+		return statut;
+	}
+
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+
 
 	@Override
 	public String toString() {

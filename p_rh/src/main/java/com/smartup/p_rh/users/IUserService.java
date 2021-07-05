@@ -25,6 +25,8 @@
   public Boolean existsUserByEmail(String email);
   
 	public User findUserById(Integer userId);
+	
+	public List<User> getallotherEmploye(String email);
 
    
   }

@@ -81,6 +81,21 @@ public class DemFraisController {
 		return new ResponseEntity<DemFraisDTO>(HttpStatus.NOT_MODIFIED);
 	}
 
+	@PostMapping("/myDemandes/{email}")
+	@ApiOperation(value = "Afficher tous les demandes d'avance sur salaire", response = List.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des demandes affiché avec succées"),
+				@ApiResponse(code = 204, message = "Aucune demande pour avance sur salaire touvé"), })
+	public ResponseEntity<List<DemFraisDTO>> getAllDemandeByUser(@PathVariable String email) {
+		List<DemFrais> demFrais = demFraisService.findByuserEmail(email);
+		if (!CollectionUtils.isEmpty(demFrais)) {
+			demFrais.removeAll(Collections.singleton(null));
+			List<DemFraisDTO> demDtos = demFrais.stream().map(dem -> {
+					return mapDemFraisToDemFraisDTO(dem);
+			}).collect(Collectors.toList());
+			return new ResponseEntity<List<DemFraisDTO>>(demDtos, HttpStatus.OK);
+		}
+		return new ResponseEntity<List<DemFraisDTO>>(HttpStatus.NO_CONTENT);
+	}
 	
 	private DemFraisDTO mapDemFraisToDemFraisDTO(DemFrais DemFrais) {
 		ModelMapper mapper = new ModelMapper();

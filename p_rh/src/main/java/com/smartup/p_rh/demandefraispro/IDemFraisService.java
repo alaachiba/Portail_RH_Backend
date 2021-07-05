@@ -11,6 +11,6 @@ public DemFrais saveDem(DemFrais demFrais);
 		
 	public void deleteDem(Integer id);
 	
-	//public List<DemFrais> getAllDemForThisUser(Integer id);
+	public List<DemFrais> findByuserEmail(String email);
 
 }

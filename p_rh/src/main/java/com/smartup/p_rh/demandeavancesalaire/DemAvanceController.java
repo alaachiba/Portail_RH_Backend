@@ -70,21 +70,21 @@ public class DemAvanceController {
 		return new ResponseEntity<DemAvanceDTO>(HttpStatus.NO_CONTENT);
 	}
 	
-	/*@GetMapping("/Mydems/{user}")
-	@ApiOperation(value = "Rechercher un utilisateur par son adresse mail", response = UserDTO.class)
-	@ApiResponses(value = { @ApiResponse(code = 404, message = "L'utilisateur n'existe pas"),
-			@ApiResponse(code = 200, message = "L'utilisateur a été modifié")})
-	public ResponseEntity<List<DemAvanceDTO>> getDemsByIdUser(@PathVariable Integer user) {
-		List<DemAvance> demAvances = demAvanceService.findByNameEndsWith(user);
+	@PostMapping("/myDemandes/{email}")
+	@ApiOperation(value = "Afficher tous les demandes d'avance sur salaire", response = List.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des demandes affiché avec succées"),
+				@ApiResponse(code = 204, message = "Aucune demande pour avance sur salaire touvé"), })
+	public ResponseEntity<List<DemAvanceDTO>> getAllDemandeAvanceByUser(@PathVariable String email) {
+		List<DemAvance> demAvances = demAvanceService.findByuserEmail(email);
 		if (!CollectionUtils.isEmpty(demAvances)) {
 			demAvances.removeAll(Collections.singleton(null));
 			List<DemAvanceDTO> demAvancesDtos = demAvances.stream().map(demAvance -> {
-				return mapDemAvanceToDemAvanceDTO(demAvance);
+					return mapDemAvanceToDemAvanceDTO(demAvance);
 			}).collect(Collectors.toList());
 			return new ResponseEntity<List<DemAvanceDTO>>(demAvancesDtos, HttpStatus.OK);
 		}
 		return new ResponseEntity<List<DemAvanceDTO>>(HttpStatus.NO_CONTENT);
-	}*/
+	}
 	
 	@PutMapping("/updateDem")
 	public ResponseEntity<DemAvanceDTO> updateDem(@RequestBody DemAvanceDTO demDTORequest) {

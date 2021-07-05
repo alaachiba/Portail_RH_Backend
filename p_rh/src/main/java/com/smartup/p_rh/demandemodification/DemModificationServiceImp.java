@@ -38,4 +38,9 @@ public class DemModificationServiceImp implements IDemModificationService {
 		return demModificationDao.save(demRequest);
 	}
 
+	@Override
+	public List<DemModification> findByuserEmail(String email) {
+		return demModificationDao.findDemByEmail(email);
+	}
+
 }

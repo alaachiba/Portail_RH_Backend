@@ -38,4 +38,9 @@ public class DemFraisServiceImp  implements IDemFraisService {
 		return demFraisDao.save(demRequest);
 	}
 
+	@Override
+	public List<DemFrais> findByuserEmail(String email) {
+		return demFraisDao.findDemByEmail(email);
+	}
+
 }

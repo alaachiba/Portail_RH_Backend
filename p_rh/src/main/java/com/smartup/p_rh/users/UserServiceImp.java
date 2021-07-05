@@ -60,4 +60,10 @@ public class UserServiceImp implements IUserService {
 		return userDao.getOne(id);
 	}
 
+	@Override
+	public List<User> getallotherEmploye(String email) {
+		return userDao.getallotherEmploye(email);
+	}
+
+
 }
