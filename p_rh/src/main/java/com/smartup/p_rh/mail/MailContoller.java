@@ -54,6 +54,7 @@ public class MailContoller {
 		mail.setSentDate(new Date());
 		mail.setSubject(mailDto.getEmailSubject());
 		mail.setText(mailDto.getEmailContent(user.getNom(),user.getPwd()));
+		System.out.println(mail.toString());
 
 		try {
 			javaMailSender.send(mail);

@@ -75,6 +75,8 @@ public class UserController {
 		return new ResponseEntity<UserDTO>(HttpStatus.NO_CONTENT);
 	}
 	
+	
+	
 	@GetMapping("/allUser")
 	@ApiOperation(value = "Afficher tous les utilisateurs", response = List.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des utilisateurs affiché avec succées"),
@@ -90,6 +92,8 @@ public class UserController {
 		}
 		return new ResponseEntity<List<UserDTO>>(HttpStatus.NO_CONTENT);
 	}
+	
+	
 	
 	@DeleteMapping("/deleteUser/{idUser}")
 	@ApiOperation(value = "Supprimer un utilisateur s'il existe", response = String.class)
