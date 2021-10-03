@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.smartup.p_rh.message.response.ResponseFile;
-import com.smartup.p_rh.message.response.ResponseMessageFile;
+import com.smartup.p_rh.message.response.ResponseMessage;
 
 @Controller
 @RequestMapping("/rest/api/file")
@@ -28,17 +28,17 @@ public class FileController {
   @Autowired
   private FileStorageService storageService;
 
-  @PostMapping("/upload")
-  public ResponseEntity<ResponseMessageFile> uploadFile(@RequestParam("file") MultipartFile file) {
+  @PostMapping("/upload/{id}")
+  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file,@PathVariable int id) {
     String message = "";
     try {
-      storageService.store(file);
+      storageService.store(file,id);
 
       message = "Uploaded the file successfully: " + file.getOriginalFilename();
-      return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessageFile(message));
+      return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
     } catch (Exception e) {
       message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessageFile(message));
+      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
     }
   }
 
@@ -55,7 +55,8 @@ public class FileController {
           dbFile.getName(),
           fileDownloadUri,
           dbFile.getType(),
-          dbFile.getData().length);
+          dbFile.getData().length,
+          dbFile.getUser());
     }).collect(Collectors.toList());
 
     return ResponseEntity.status(HttpStatus.OK).body(files);

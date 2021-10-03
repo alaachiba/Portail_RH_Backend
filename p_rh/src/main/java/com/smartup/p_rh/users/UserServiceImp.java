@@ -2,7 +2,12 @@
 package com.smartup.p_rh.users;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("UserService")
 @Transactional
 public class UserServiceImp implements IUserService {
-
+	@Autowired
+	PasswordEncoder encoder;
 	@Autowired
 	private UserRepository userDao;
 
@@ -64,6 +70,16 @@ public class UserServiceImp implements IUserService {
 	public List<User> getallotherEmploye(String email) {
 		return userDao.getallotherEmploye(email);
 	}
-
+	public ResponseEntity<String> changeuserpassword(String password,String newpassword, Integer id) {
+		Optional<User> usr  = userDao.findById(id);
+		System.out.println(usr.get().getPwd());
+		System.out.println(password);
+		System.out.println(encoder.matches(password, usr.get().getPwd()));
+		if(encoder.matches(password, usr.get().getPwd())) {
+			userDao.changepassword(encoder.encode(newpassword),id);	
+			return new ResponseEntity<String>("password user updated successfully", HttpStatus.OK);
+		}
+	return new ResponseEntity<String>("error while updating password",HttpStatus.BAD_REQUEST);
+	}
 
 }

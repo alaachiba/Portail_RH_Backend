@@ -1,16 +1,20 @@
 package com.smartup.p_rh.message.response;
 
+import com.smartup.p_rh.users.User;
+
 public class ResponseFile {
 	  private String name;
 	  private String url;
 	  private String type;
 	  private long size;
+	  private User user;
 
-	  public ResponseFile(String name, String url, String type, long size) {
+	  public ResponseFile(String name, String url, String type, long size, User user) {
 	    this.name = name;
 	    this.url = url;
 	    this.type = type;
 	    this.size = size;
+	    this.user = user;
 	  }
 
 	  public String getName() {
@@ -44,5 +48,15 @@ public class ResponseFile {
 	  public void setSize(long size) {
 	    this.size = size;
 	  }
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	  
+	  
 
 	}

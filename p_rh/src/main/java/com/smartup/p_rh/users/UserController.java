@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-
+import org.json.*;
 
 @RestController
 @RequestMapping("/rest/api/user")
@@ -130,4 +130,11 @@ public class UserController {
 		User user = mapper.map(userDTORequest, User.class);
 		return user;
 	}
+	@PostMapping("/changepassword")
+	public ResponseEntity<String> changeUserPassword(@RequestBody Passwordparser req) {
+		
+		return userService.changeuserpassword(req.getoldpass(),req.getnewpassword(), req.getId());
+		
+	}
+	
 }

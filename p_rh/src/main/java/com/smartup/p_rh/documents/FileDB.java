@@ -4,10 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.smartup.p_rh.users.User;
 
 @Entity
 @Table(name = "files")
@@ -27,6 +31,10 @@ public class FileDB {
   @Lob
   @Column(name = "data")
   private byte[] data;
+  
+  @ManyToOne
+  @JoinColumn(name = "users_login")
+  private User user;
 
   public FileDB() {
   }
@@ -65,5 +73,14 @@ public class FileDB {
     this.data = data;
   }
 
+  public User getUser() {
+	return user;
+}
+
+  public void setUser(User user) {
+	this.user = user;
+}
+
+  
 }
 
