@@ -17,38 +17,35 @@ import com.smartup.p_rh.users.User;
 @Entity
 @Table(name = "employee_infos_rh_dem")
 public class DemModification {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "employee_infos_rh_dem_id")
 	private Integer id;
-	
+
 	@Column(name = "employee_infos_rh_dem_descripti")
 	private String description;
-	
+
 	@Column(name = "employee_infos_rh_dem_statu")
 	private String statusDem;
-	
+
 	@Column(name = "employee_infos_rh_dem_date")
 	private Date dateDem;
-	
+
 	@Column(name = "motif")
 	private String motif;
-	
+
 	@ManyToOne
-	@JoinColumn(name= "users_login")
+	@JoinColumn(name = "users_login")
 	private User user;
 
-	
 	@ManyToOne
-	@JoinColumn(name="demModification")
+	@JoinColumn(name = "demModification")
 	private DemModificationType demModificationType;
-	
 
 	public DemModification() {
 		super();
 	}
-	
 
 	public DemModification(Integer id, String description, String statusDem, Date dateDem, String motif) {
 		super();
@@ -59,30 +56,34 @@ public class DemModification {
 		this.motif = motif;
 	}
 
-
-
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public User getIdUser() {
 		return user;
 	}
+
 	public void setIdUser(User user) {
 		this.user = user;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public String getStatusDem() {
 		return statusDem;
 	}
-	
+
 	public Date getDateDem() {
 		return dateDem;
 	}
@@ -103,8 +104,6 @@ public class DemModification {
 		this.user = user;
 	}
 
-	
-
 	public DemModificationType getDemModificationType() {
 		return demModificationType;
 	}
@@ -112,26 +111,19 @@ public class DemModification {
 	public void setDemModificationType(DemModificationType demModificationType) {
 		this.demModificationType = demModificationType;
 	}
-	
-	
 
 	public String getMotif() {
 		return motif;
 	}
 
-
 	public void setMotif(String motif) {
 		this.motif = motif;
 	}
-
 
 	@Override
 	public String toString() {
 		return "DemModification [id=" + id + ", description=" + description + ", statusDem=" + statusDem + ", dateDem="
 				+ dateDem + ", user=" + user + ", demModificationType=" + demModificationType + "]";
 	}
-	
-	
-	
 
 }

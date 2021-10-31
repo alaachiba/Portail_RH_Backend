@@ -32,7 +32,7 @@ public class DemAvanceController {
 
 	@Autowired
 	private DemAvanceServiceImp demAvanceService;
-	
+
 	@PostMapping("/addDemAvance")
 	@ApiOperation(value = "Ajouter une demande d'avance sur salaire", response = DemAvanceDTO.class)
 	@ApiResponse(code = 201, message = "La demande d'avance à été envoyé avec succées")
@@ -45,7 +45,7 @@ public class DemAvanceController {
 		}
 		return new ResponseEntity<DemAvanceDTO>(HttpStatus.NOT_MODIFIED);
 	}
-	
+
 	@GetMapping("/ListDemAvance")
 	@ApiOperation(value = "Afficher tous les demandes d'avance sur salaire", response = List.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des demandes affiché avec succées"),
@@ -69,24 +69,28 @@ public class DemAvanceController {
 		demAvanceService.deleteDemAvance(id);
 		return new ResponseEntity<DemAvanceDTO>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@GetMapping("/myDemandes/{email}")
-	@ApiOperation(value = "Afficher tous les demandes d'avance sur salaire", response = List.class)
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des demandes affiché avec succées"),
-				@ApiResponse(code = 204, message = "Aucune demande pour avance sur salaire touvé"), })
+	@ApiOperation(value = "Afficher tous mes demandes d'avance sur salaire", response = List.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste de mes demandes affiché avec succées"),
+			@ApiResponse(code = 204, message = "Aucune demande pour avance sur salaire touvé"), })
 	public ResponseEntity<List<DemAvanceDTO>> getAllDemandeAvanceByUser(@PathVariable String email) {
 		List<DemAvance> demAvances = demAvanceService.findByuserEmail(email);
 		if (!CollectionUtils.isEmpty(demAvances)) {
 			demAvances.removeAll(Collections.singleton(null));
 			List<DemAvanceDTO> demAvancesDtos = demAvances.stream().map(demAvance -> {
-					return mapDemAvanceToDemAvanceDTO(demAvance);
+				return mapDemAvanceToDemAvanceDTO(demAvance);
 			}).collect(Collectors.toList());
 			return new ResponseEntity<List<DemAvanceDTO>>(demAvancesDtos, HttpStatus.OK);
 		}
 		return new ResponseEntity<List<DemAvanceDTO>>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@PutMapping("/updateDem")
+	@ApiOperation(value = "Modifier une demande d'avance sur salaire existante", response = DemAvanceDTO.class)
+	@ApiResponses(value = { @ApiResponse(code = 404, message = "La demande d'avance sur salaire n'existe pas"),
+			@ApiResponse(code = 200, message = "La demande d'avance sur salaire a été modifiée"),
+			@ApiResponse(code = 304, message = "Erreur lors de la modification de la demande d'avance sur salaire") })
 	public ResponseEntity<DemAvanceDTO> updateDem(@RequestBody DemAvanceDTO demDTORequest) {
 		DemAvance demRequest = mapDemAvanceDTOToDemAvance(demDTORequest);
 		if (!demAvanceService.checkIfIdExists(demDTORequest.getId())) {
@@ -99,7 +103,7 @@ public class DemAvanceController {
 		}
 		return new ResponseEntity<DemAvanceDTO>(HttpStatus.NOT_MODIFIED);
 	}
-	
+
 	private DemAvanceDTO mapDemAvanceToDemAvanceDTO(DemAvance demAvance) {
 		ModelMapper mapper = new ModelMapper();
 		DemAvanceDTO demAvanceDTO = mapper.map(demAvance, DemAvanceDTO.class);

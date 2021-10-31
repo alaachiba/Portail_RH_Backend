@@ -18,16 +18,17 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	public Boolean existsByNom(String nom);
 
 	public Boolean existsByEmail(String email);
-	
+
 	public Optional<User> findByUsername(String username);
-	
-    public Boolean existsByMatricule(Integer matricule);
-    
-    public Boolean existsByUsername(String username);
-    
-    @Query(value="select e.* from users as e WHERE e.users_email != ?1 ", nativeQuery = true)
-	List<User> getallotherEmploye (String email);
-    @Modifying	
-    @Query("update User u set u.pwd = :password where u.id = :id")
-    public void changepassword(String password, Integer id);
+
+	public Boolean existsByMatricule(Integer matricule);
+
+	public Boolean existsByUsername(String username);
+
+	@Query(value = "select e.* from users as e WHERE e.users_email != ?1 ", nativeQuery = true)
+	List<User> getallotherEmploye(String email);
+
+	@Modifying
+	@Query("update User u set u.pwd = :password where u.id = :id")
+	public void changepassword(String password, Integer id);
 }

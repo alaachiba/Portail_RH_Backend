@@ -9,12 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("Demande Avance salaire service")
 @Transactional
 public class DemAvanceServiceImp implements IDemAvanceService {
-	
+
 	@Autowired
 	DemAvanceRepository demAvanceDao;
 
 	@Override
-	public DemAvance saveDem(DemAvance demAvance) {		
+	public DemAvance saveDem(DemAvance demAvance) {
 		return demAvanceDao.save(demAvance);
 	}
 
@@ -26,15 +26,13 @@ public class DemAvanceServiceImp implements IDemAvanceService {
 	@Override
 	public void deleteDemAvance(Integer id) {
 		demAvanceDao.deleteById(id);
-		
+
 	}
 
-	
 	@Override
 	public List<DemAvance> getAllDemAvance() {
 		return demAvanceDao.findAll();
 	}
-
 
 	@Override
 	public DemAvance findDemByIdU(Integer user) {
@@ -50,7 +48,7 @@ public class DemAvanceServiceImp implements IDemAvanceService {
 	public List<DemAvance> findByuser(Integer user) {
 		return demAvanceDao.findByuser(user);
 	}
-	
+
 	@Override
 	public List<DemAvance> findByuserEmail(String email) {
 		return demAvanceDao.findDemByEmail(email);

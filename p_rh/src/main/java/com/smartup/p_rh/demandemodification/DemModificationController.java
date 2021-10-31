@@ -34,8 +34,7 @@ public class DemModificationController {
 	private DemModificationServiceImp DemModificationService;
 
 	@PostMapping("/addDemModification")
-	@ApiOperation(value = "Ajouter une demande de modification des informations personnelles",
-	response = DemModificationDTO.class)
+	@ApiOperation(value = "Ajouter une demande de modification des informations personnelles", response = DemModificationDTO.class)
 	@ApiResponse(code = 201, message = "La demande de modification a été envoyé avec succées")
 	public ResponseEntity<DemModificationDTO> createNewDemModification(
 			@RequestBody DemModificationDTO DemModificationDTORequest) {
@@ -48,16 +47,13 @@ public class DemModificationController {
 		return new ResponseEntity<DemModificationDTO>(HttpStatus.NOT_MODIFIED);
 	}
 
-
 	@GetMapping("/ListDemModification")
-	@ApiOperation(value = "Afficher tous les demandes de modification des informations personnelles",
-	response = List.class)
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des demandes de modification affiché avec succées"),
+	@ApiOperation(value = "Afficher tous les demandes de modification des informations personnelles", response = List.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "La liste des demandes de modification affiché avec succées"),
 			@ApiResponse(code = 204, message = "Aucune demande de modification touvé"), })
 	public ResponseEntity<List<DemModificationDTO>> getAllDemModification() {
-		
 		List<DemModification> DemModifications = DemModificationService.getAllDem();
-		
 		if (!CollectionUtils.isEmpty(DemModifications)) {
 			DemModifications.removeAll(Collections.singleton(null));
 			List<DemModificationDTO> DemModificationDTOs = DemModifications.stream().map(DemModification -> {
@@ -65,10 +61,10 @@ public class DemModificationController {
 			}).collect(Collectors.toList());
 			return new ResponseEntity<List<DemModificationDTO>>(DemModificationDTOs, HttpStatus.OK);
 		}
-		
+
 		return new ResponseEntity<List<DemModificationDTO>>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@DeleteMapping("/deleteDemande/{id}")
 	@ApiOperation(value = "Supprimer une demande si elle existe", response = String.class)
 	@ApiResponse(code = 204, message = "La demande de modification a été supprimé avec succées")
@@ -76,8 +72,12 @@ public class DemModificationController {
 		DemModificationService.deleteDem(id);
 		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@PutMapping("/updateDem")
+	@ApiOperation(value = "Modifier une demande de modification existante", response = DemModificationDTO.class)
+	@ApiResponses(value = { @ApiResponse(code = 404, message = "La demande de modification n'existe pas"),
+			@ApiResponse(code = 200, message = "La demande de modification a été modifiée"),
+			@ApiResponse(code = 304, message = "Erreur lors de la modification de demande de modification") })
 	public ResponseEntity<DemModificationDTO> updateDem(@RequestBody DemModificationDTO demDTORequest) {
 		DemModification demRequest = mapDemModificationDTOToDemModification(demDTORequest);
 		if (!DemModificationService.checkIfIdExists(demDTORequest.getId())) {
@@ -92,21 +92,21 @@ public class DemModificationController {
 	}
 
 	@GetMapping("/myDemandes/{email}")
-	@ApiOperation(value = "Afficher tous les demandes d'avance sur salaire", response = List.class)
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des demandes affiché avec succées"),
-				@ApiResponse(code = 204, message = "Aucune demande pour avance sur salaire touvé"), })
+	@ApiOperation(value = "Afficher tous mes demandes de modification", response = List.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste de mes demandes affiché avec succées"),
+			@ApiResponse(code = 204, message = "Aucune demande de modification touvé"), })
 	public ResponseEntity<List<DemModificationDTO>> getAllDemandeByUser(@PathVariable String email) {
 		List<DemModification> demModif = DemModificationService.findByuserEmail(email);
 		if (!CollectionUtils.isEmpty(demModif)) {
 			demModif.removeAll(Collections.singleton(null));
 			List<DemModificationDTO> demDtos = demModif.stream().map(dem -> {
-					return mapDemModificationToDemModificationDTO(dem);
+				return mapDemModificationToDemModificationDTO(dem);
 			}).collect(Collectors.toList());
 			return new ResponseEntity<List<DemModificationDTO>>(demDtos, HttpStatus.OK);
 		}
 		return new ResponseEntity<List<DemModificationDTO>>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	private DemModificationDTO mapDemModificationToDemModificationDTO(DemModification DemModification) {
 		ModelMapper mapper = new ModelMapper();
 		DemModificationDTO DemModificationDTO = mapper.map(DemModification, DemModificationDTO.class);

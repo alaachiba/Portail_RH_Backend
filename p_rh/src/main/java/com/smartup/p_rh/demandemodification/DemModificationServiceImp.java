@@ -9,20 +9,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("demande modification service")
 @Transactional
 public class DemModificationServiceImp implements IDemModificationService {
-	
+
 	@Autowired
 	DemModificationRepository demModificationDao;
-	
 
 	@Override
-	public  DemModification saveDem(DemModification demModification) {
+	public DemModification saveDem(DemModification demModification) {
 		return demModificationDao.save(demModification);
 	}
 
 	@Override
 	public void deleteDem(Integer id) {
-		demModificationDao.deleteById(id);	
-		
+		demModificationDao.deleteById(id);
+
 	}
 
 	@Override

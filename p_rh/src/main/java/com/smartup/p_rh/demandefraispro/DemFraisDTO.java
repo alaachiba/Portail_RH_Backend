@@ -7,37 +7,33 @@ import com.smartup.p_rh.users.User;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-
 @ApiModel(value = "Modele de demande des frais profetionnels")
 public class DemFraisDTO {
-	
+
 	@ApiModelProperty(notes = "Id de demande frais")
-    private Integer id;
-	
+	private Integer id;
+
 	@ApiModelProperty(notes = "Le montant de frais")
 	private float montant;
-	
+
 	@ApiModelProperty(notes = "La date le la mission")
 	private Date dateMission;
-	
+
 	@ApiModelProperty(notes = "La date de la demande de frais profetionnels")
 	private Date dateDem;
-	
+
 	@ApiModelProperty(notes = "Le motif en cas de refus")
 	private String motif;
-	
+
 	@ApiModelProperty(notes = "le statut de la demande")
 	private String statut;
 
 	@ApiModelProperty(notes = "Le demandeur des frais profetionnels")
 	private User user;
-	
-	
 
 	public DemFraisDTO() {
 		super();
 	}
-
 
 	public DemFraisDTO(Integer id, float montant, Date dateMission, Date dateDem, String motif, String statut) {
 		super();
@@ -48,14 +44,6 @@ public class DemFraisDTO {
 		this.motif = motif;
 		this.statut = statut;
 	}
-
-
-
-
-
-
-
-
 
 	public Integer getId() {
 		return id;
@@ -82,11 +70,9 @@ public class DemFraisDTO {
 	}
 
 	public Date getDateDem() {
-		
+
 		return dateDem;
 	}
-
-
 
 	public User getUser() {
 		return user;
@@ -96,33 +82,24 @@ public class DemFraisDTO {
 		this.user = user;
 	}
 
-
 	public void setDateDem(Date dateDem) {
 		this.dateDem = dateDem;
 	}
-
 
 	public String getMotif() {
 		return motif;
 	}
 
-
 	public void setMotif(String motif) {
 		this.motif = motif;
 	}
-
 
 	public String getStatut() {
 		return statut;
 	}
 
-
 	public void setStatut(String statut) {
 		this.statut = statut;
 	}
-	
-	
-	
-	
 
 }

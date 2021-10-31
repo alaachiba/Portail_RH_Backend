@@ -29,10 +29,10 @@ import io.swagger.annotations.ApiResponses;
 @CrossOrigin(origins = "*")
 @Api(value = "Rest Controller: Demande de frais professionels")
 public class DemFraisController {
-	
+
 	@Autowired
 	DemFraisServiceImp demFraisService;
-	
+
 	@GetMapping("/allDemFrais")
 	@ApiOperation(value = "Afficher tous les demandes de frais professionels", response = List.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des demandes de frais affiché avec succées"),
@@ -48,7 +48,7 @@ public class DemFraisController {
 		}
 		return new ResponseEntity<List<DemFraisDTO>>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@PostMapping("/addDemFrais")
 	@ApiOperation(value = "Ajouter une demande des frais professionels", response = DemFraisDTO.class)
 	@ApiResponse(code = 201, message = "La demande de frais a été envoyé avec succées")
@@ -58,7 +58,7 @@ public class DemFraisController {
 		DemFraisDTO DemFraisDTO = mapDemFraisToDemFraisDTO(DemFrais);
 		return new ResponseEntity<DemFraisDTO>(DemFraisDTO, HttpStatus.CREATED);
 	}
-	
+
 	@DeleteMapping("/deleteDemFrais/{id}")
 	@ApiOperation(value = "Supprimer une demande des frais professionels", response = String.class)
 	@ApiResponse(code = 204, message = "La demande de frais a été supprimé avec succées")
@@ -66,8 +66,12 @@ public class DemFraisController {
 		demFraisService.deleteDem(id);
 		return new ResponseEntity<DemFraisDTO>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@PutMapping("/updateDem")
+	@ApiOperation(value = "Modifier une demande des frais professionnels existante", response = DemFraisDTO.class)
+	@ApiResponses(value = { @ApiResponse(code = 404, message = "La demande des frais professionnels n'existe pas"),
+			@ApiResponse(code = 200, message = "La demande des frais professionnel a été modifiée"),
+			@ApiResponse(code = 304, message = "Erreur lors de la modification de la demande des frais professionnels") })
 	public ResponseEntity<DemFraisDTO> updateDem(@RequestBody DemFraisDTO demDTORequest) {
 		DemFrais demRequest = mapDemFraisDTOToDemFrais(demDTORequest);
 		if (!demFraisService.checkIfIdExists(demDTORequest.getId())) {
@@ -82,27 +86,27 @@ public class DemFraisController {
 	}
 
 	@GetMapping("/myDemandes/{email}")
-	@ApiOperation(value = "Afficher tous les demandes d'avance sur salaire", response = List.class)
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des demandes affiché avec succées"),
-				@ApiResponse(code = 204, message = "Aucune demande pour avance sur salaire touvé"), })
+	@ApiOperation(value = "Afficher tous mes demandes des frais professionnels", response = List.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste de mes demandes affiché avec succées"),
+			@ApiResponse(code = 204, message = "Aucune demande des frais professionnels touvée"), })
 	public ResponseEntity<List<DemFraisDTO>> getAllDemandeByUser(@PathVariable String email) {
 		List<DemFrais> demFrais = demFraisService.findByuserEmail(email);
 		if (!CollectionUtils.isEmpty(demFrais)) {
 			demFrais.removeAll(Collections.singleton(null));
 			List<DemFraisDTO> demDtos = demFrais.stream().map(dem -> {
-					return mapDemFraisToDemFraisDTO(dem);
+				return mapDemFraisToDemFraisDTO(dem);
 			}).collect(Collectors.toList());
 			return new ResponseEntity<List<DemFraisDTO>>(demDtos, HttpStatus.OK);
 		}
 		return new ResponseEntity<List<DemFraisDTO>>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	private DemFraisDTO mapDemFraisToDemFraisDTO(DemFrais DemFrais) {
 		ModelMapper mapper = new ModelMapper();
 		DemFraisDTO DemFraisDTO = mapper.map(DemFrais, DemFraisDTO.class);
 		return DemFraisDTO;
 	}
-	
+
 	private DemFrais mapDemFraisDTOToDemFrais(DemFraisDTO demDTORequest) {
 		ModelMapper mapper = new ModelMapper();
 		DemFrais DemFrais = mapper.map(demDTORequest, DemFrais.class);

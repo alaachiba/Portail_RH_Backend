@@ -27,13 +27,13 @@ public class DemAvance {
 
 	@Column(name = "employee_av_salaire_dem_date")
 	private Date demAvance;
-	
+
 	@Column(name = "statut")
 	private String statut;
-	
-	@Column(name ="motif")
+
+	@Column(name = "motif")
 	private String motif;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "users_login")
 	private User user;
@@ -51,11 +51,6 @@ public class DemAvance {
 		this.motif = motif;
 	}
 
-
-
-
-
-
 	public Integer getId() {
 		return id;
 	}
@@ -72,17 +67,13 @@ public class DemAvance {
 		this.montant = montant;
 	}
 
-	
-
 	public Date getDemAvance() {
 		return demAvance;
 	}
 
-
 	public void setDemAvance(Date demAvance) {
 		this.demAvance = demAvance;
 	}
-
 
 	public User getUser() {
 		return user;
@@ -92,7 +83,6 @@ public class DemAvance {
 		this.user = user;
 	}
 
-
 	public String getStatut() {
 		return statut;
 	}
@@ -101,12 +91,10 @@ public class DemAvance {
 		this.statut = statut;
 	}
 
-
 	public Integer getUserId() {
-        return user.getIdUser();
-   }
-	
-	
+		return user.getIdUser();
+	}
+
 	public String getMotif() {
 		return motif;
 	}
@@ -120,6 +108,5 @@ public class DemAvance {
 		return "DemAvance [id=" + id + ", montant=" + montant + ", demAvance=" + demAvance + ", statut=" + statut
 				+ ", user=" + user + ", getUserId()=" + getUserId() + "]";
 	}
-	
-	
+
 }

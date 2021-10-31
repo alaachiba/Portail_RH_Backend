@@ -31,15 +31,15 @@ public class DemModificationTypeController {
 
 	@Autowired
 	private DemModificationTypeServiceImp DemModificationTypeService;
-	
+
 	@GetMapping("/ListDemModificationType")
-	@ApiOperation(value = "Afficher tous les types des demandes de modification des informations personnelles",
-	response = List.class)
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des types des demandes de modification affiché avec succées"),
+	@ApiOperation(value = "Afficher tous les types des demandes de modification des informations personnelles", response = List.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "La liste des types des demandes de modification affiché avec succées"),
 			@ApiResponse(code = 204, message = "Aucun type de demande de modification touvé"), })
 	public ResponseEntity<List<DemModificationTypeDTO>> getAllDemModification() {
 		List<DemModificationType> DemModifications = DemModificationTypeService.getAlldemModif();
-		
+
 		if (!CollectionUtils.isEmpty(DemModifications)) {
 			DemModifications.removeAll(Collections.singleton(null));
 			List<DemModificationTypeDTO> DemModificationDTOs = DemModifications.stream().map(DemModification -> {
@@ -47,13 +47,12 @@ public class DemModificationTypeController {
 			}).collect(Collectors.toList());
 			return new ResponseEntity<List<DemModificationTypeDTO>>(DemModificationDTOs, HttpStatus.OK);
 		}
-		
+
 		return new ResponseEntity<List<DemModificationTypeDTO>>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@PostMapping("/addDemModificationType")
-	@ApiOperation(value = "Ajouter un type de demande de modification des informations personnelles",
-	response = DemModificationDTO.class)
+	@ApiOperation(value = "Ajouter un type de demande de modification des informations personnelles", response = DemModificationDTO.class)
 	@ApiResponse(code = 201, message = "Le type de demande de modification a été ajouté avec succées")
 	public ResponseEntity<DemModificationTypeDTO> createNewDemModification(
 			@RequestBody DemModificationTypeDTO DemModificationDTORequest) {
@@ -65,7 +64,7 @@ public class DemModificationTypeController {
 		}
 		return new ResponseEntity<DemModificationTypeDTO>(HttpStatus.NOT_MODIFIED);
 	}
-	
+
 	private DemModificationTypeDTO mapDemModificationToDemModificationDTO(DemModificationType DemModification) {
 		ModelMapper mapper = new ModelMapper();
 		DemModificationTypeDTO DemModificationDTO = mapper.map(DemModification, DemModificationTypeDTO.class);

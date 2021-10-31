@@ -71,7 +71,7 @@ public class AuthRestAPIs {
 
 		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
 	}
-	
+
 	@PostMapping("/signup")
 	@ApiResponse(code = 201, message = "L'utilisateur a été créé avec succées")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
@@ -84,9 +84,9 @@ public class AuthRestAPIs {
 			return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
 					HttpStatus.BAD_REQUEST);
 		}
-				User user = new User(signUpRequest.getNom(), signUpRequest.getPrenom(), signUpRequest.getMatricule(),
-						signUpRequest.getEmail(), signUpRequest.getStatus(), encoder.encode(signUpRequest.getPwd()),signUpRequest.getEmail());
-
+		User user = new User(signUpRequest.getNom(), signUpRequest.getPrenom(), signUpRequest.getMatricule(),
+				signUpRequest.getEmail(), signUpRequest.getStatus(), encoder.encode(signUpRequest.getPwd()),
+				signUpRequest.getEmail());
 
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();

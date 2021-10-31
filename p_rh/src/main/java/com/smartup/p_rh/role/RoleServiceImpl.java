@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("roleService")
 @Transactional
-public class RoleServiceImpl implements RoleService{
-	
+public class RoleServiceImpl implements RoleService {
+
 	@Autowired
 	private RoleRepository roleDao;
 
@@ -26,5 +26,5 @@ public class RoleServiceImpl implements RoleService{
 	@Override
 	public boolean checkIfIdExists(Integer id) {
 		return roleDao.existsById(id);
-	}	
+	}
 }

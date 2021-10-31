@@ -10,18 +10,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "employee_conges_dem_type")
 public class DemandeCongeType {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)  
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "employee_conges_dem_type_id")
 	private Integer id;
-	
+
 	@Column(name = "employee_conges_dem_dem_type")
 	private String type;
-	
-	/*@OneToMany(mappedBy="demandeCongeType")
-	private Collection<DemandeConge> demandeConge;*/
-		
+
 	public DemandeCongeType() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -48,5 +45,5 @@ public class DemandeCongeType {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 }

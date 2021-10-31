@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "Modele demande avance salaire")
 public class DemAvanceDTO {
 
-	@ApiModelProperty(notes = "id de demande avance salaire")
+	@ApiModelProperty(notes = "Id de demande avance salaire")
 	private Integer id;
 
 	@ApiModelProperty(notes = "Le montant de l'avance")
@@ -18,10 +18,10 @@ public class DemAvanceDTO {
 
 	@ApiModelProperty(notes = "La date de la demande")
 	private Date demAvance;
-	
+
 	@ApiModelProperty(notes = "Le statut de la demande")
 	private String statut;
-	
+
 	@ApiModelProperty(notes = "Le motif en cas de refus")
 	private String motif;
 
@@ -31,7 +31,6 @@ public class DemAvanceDTO {
 	public DemAvanceDTO() {
 		super();
 	}
-	
 
 	public DemAvanceDTO(Integer id, float montant, Date demAvance, String statut, String motif) {
 		super();
@@ -41,11 +40,6 @@ public class DemAvanceDTO {
 		this.statut = statut;
 		this.motif = motif;
 	}
-
-
-
-
-
 
 	public Integer getId() {
 		return id;
@@ -67,7 +61,6 @@ public class DemAvanceDTO {
 		return demAvance;
 	}
 
-
 	public void setDemAvance(Date demAvance) {
 		this.demAvance = demAvance;
 	}
@@ -80,26 +73,20 @@ public class DemAvanceDTO {
 		this.user = user;
 	}
 
-
 	public String getStatut() {
 		return statut;
 	}
-
 
 	public void setStatut(String statut) {
 		this.statut = statut;
 	}
 
-
 	public String getMotif() {
 		return motif;
 	}
 
-
 	public void setMotif(String motif) {
 		this.motif = motif;
 	}
-	
-	
 
 }

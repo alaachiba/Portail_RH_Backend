@@ -13,24 +13,23 @@ import com.smartup.p_rh.users.UserServiceImp;
 @Service
 public class FileStorageService {
 
-  @Autowired
-  private FileDBRepository fileDBRepository;
-  @Autowired
-  private UserServiceImp userService;
-  
-  public FileDB store(MultipartFile file, int id) throws IOException {
-    String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-    FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
-    
-    FileDB.setUser(userService.findUserById(id));
-    return fileDBRepository.save(FileDB);
-  }
+	@Autowired
+	private FileDBRepository fileDBRepository;
+	@Autowired
+	private UserServiceImp userService;
 
-  public FileDB getFile(String id) {
-    return fileDBRepository.findById(id).get();
-  }
-  
-  public Stream<FileDB> getAllFiles() {
-    return fileDBRepository.findAll().stream();
-  }
+	public FileDB store(MultipartFile file, int id) throws IOException {
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
+		FileDB.setUser(userService.findUserById(id));
+		return fileDBRepository.save(FileDB);
+	}
+
+	public FileDB getFile(String id) {
+		return fileDBRepository.findById(id).get();
+	}
+
+	public Stream<FileDB> getAllFiles() {
+		return fileDBRepository.findAll().stream();
+	}
 }

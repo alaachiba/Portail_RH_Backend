@@ -1,6 +1,5 @@
 package com.smartup.p_rh.congetype;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("typeCongeService")
 @Transactional
-public class DemandeCongeTypeServiceImp implements IDemandeCongeTypeService  {
-	
+public class DemandeCongeTypeServiceImp implements IDemandeCongeTypeService {
+
 	@Autowired
 	private DemandeCongeTypeRepository demandeCongeTypeRepository;
 
@@ -32,18 +31,13 @@ public class DemandeCongeTypeServiceImp implements IDemandeCongeTypeService  {
 	@Override
 	public void deleteType(Integer id) {
 		demandeCongeTypeRepository.deleteById(id);
-		
-		
+
 	}
 
 	@Override
 	public List<DemandeCongeType> getAllTypeConge() {
 		return demandeCongeTypeRepository.findAll();
-		
-		
+
 	}
-	
 
 }
-	
-	

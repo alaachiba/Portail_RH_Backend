@@ -66,7 +66,6 @@ public class DemandeCongeTypeController {
 		typeService.deleteType(id);
 		return new ResponseEntity<DemandeCongeTypeDTO>(HttpStatus.NO_CONTENT);
 	}
-	
 
 	@PutMapping("/updateTypeConge")
 	@ApiOperation(value = "Modifier un type de congé existant", response = DemandeCongeTypeDTO.class)

@@ -16,132 +16,83 @@ public class UserPrinciple implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	private Integer idUser;
-	 	 
-	    private String nom;
-	 
-	    private String prenom;
-	    
-	    private Integer matricule;
-	    
-		private String email;
-		
-		private String username;
-		
-		private String status;
-	 
-	    @JsonIgnore
-	    private String pwd;
-	    
-	    private Collection<? extends GrantedAuthority> authorities;
 
+	private String nom;
 
+	private String prenom;
 
-	
-	
-	
-	 public UserPrinciple(Integer idUser, String nom, String prenom, Integer matricule, String email,
-				String username, String status, String pwd, Collection<? extends GrantedAuthority> authorities) {
-			super();
-			this.idUser = idUser;
-			this.nom = nom;
-			this.prenom = prenom;
-			this.matricule = matricule;
-			this.email = email;
-			this.username = username;
-			this.status = status;
-			this.pwd = pwd;
-			this.authorities = authorities;
-		}
-	    
-	    
+	private Integer matricule;
 
+	private String email;
 
+	private String username;
 
+	private String status;
+
+	@JsonIgnore
+	private String pwd;
+
+	private Collection<? extends GrantedAuthority> authorities;
+
+	public UserPrinciple(Integer idUser, String nom, String prenom, Integer matricule, String email, String username,
+			String status, String pwd, Collection<? extends GrantedAuthority> authorities) {
+		super();
+		this.idUser = idUser;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.matricule = matricule;
+		this.email = email;
+		this.username = username;
+		this.status = status;
+		this.pwd = pwd;
+		this.authorities = authorities;
+	}
 
 	public static UserPrinciple build(User user) {
-	        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
-	                new SimpleGrantedAuthority(role.getLibelle().name())
-	        ).collect(Collectors.toList());
-	 
-	        return new UserPrinciple(
-	        		user.getIdUser(),
-	        		user.getNom(),
-	        		user.getPrenom(),
-	        		user.getMatricule(), 
-	        		user.getEmail(), 
-	        		user.getUsername(),
-	        		user.getStatus(),
-	        		user.getPwd(),
-	        		authorities
-	        		);
-	                
-	    }
+		List<GrantedAuthority> authorities = user.getRoles().stream()
+				.map(role -> new SimpleGrantedAuthority(role.getLibelle().name())).collect(Collectors.toList());
 
+		return new UserPrinciple(user.getIdUser(), user.getNom(), user.getPrenom(), user.getMatricule(),
+				user.getEmail(), user.getUsername(), user.getStatus(), user.getPwd(), authorities);
+
+	}
 
 	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
 		this.authorities = authorities;
 	}
 
-
-
-
-
 	public Integer getIdUser() {
 		return idUser;
 	}
-
-
-
 
 	public String getNom() {
 		return nom;
 	}
 
-
-
-
 	public String getPrenom() {
 		return prenom;
 	}
-
-
-
 
 	public Integer getMatricule() {
 		return matricule;
 	}
 
-
-
-
 	public String getEmail() {
 		return email;
 	}
-
-
-
 
 	public String getStatus() {
 		return status;
 	}
 
-
-
-
-	
-	
 	public String getPwd() {
 		return pwd;
 	}
-
-
-
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
 	}
-
 
 	@Override
 	public boolean isAccountNonExpired() {
@@ -163,25 +114,21 @@ public class UserPrinciple implements UserDetails {
 		return true;
 	}
 
-	   @Override
-	    public boolean equals(Object o) {
-	        if (this == o) return true;
-	        if (o == null || getClass() != o.getClass()) return false;
-	        
-	        UserPrinciple user = (UserPrinciple) o;
-	        return Objects.equals(idUser, user.idUser);
-	    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
-
-
+		UserPrinciple user = (UserPrinciple) o;
+		return Objects.equals(idUser, user.idUser);
+	}
 
 	@Override
 	public String getPassword() {
 		return pwd;
 	}
-
-
-
 
 	@Override
 	public String getUsername() {
@@ -220,5 +167,5 @@ public class UserPrinciple implements UserDetails {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
+
 }

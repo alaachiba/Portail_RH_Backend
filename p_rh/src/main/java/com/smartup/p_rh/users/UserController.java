@@ -28,8 +28,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-import org.json.*;
-
 @RestController
 @RequestMapping("/rest/api/user")
 @CrossOrigin(origins = "*")
@@ -42,7 +40,7 @@ public class UserController {
 
 	@Autowired
 	RoleRepository roleDao;
-	
+
 	@PutMapping("/updateUser")
 	@ApiOperation(value = "Modifier un utilisateur", response = UserDTO.class)
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "L'utilisateur n'existe pas"),
@@ -61,11 +59,11 @@ public class UserController {
 
 		return new ResponseEntity<UserDTO>(HttpStatus.NOT_MODIFIED);
 	}
-	
+
 	@GetMapping("/searchByEmail/{email}")
 	@ApiOperation(value = "Rechercher un utilisateur par son adresse mail", response = UserDTO.class)
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "L'utilisateur n'existe pas"),
-			@ApiResponse(code = 200, message = "L'utilisateur a été trouvé")})
+			@ApiResponse(code = 200, message = "L'utilisateur a été trouvé") })
 	public ResponseEntity<UserDTO> searchUserByEmail(@PathVariable String email) {
 		User user = userService.findUserByEmail(email);
 		if (user != null) {
@@ -74,9 +72,7 @@ public class UserController {
 		}
 		return new ResponseEntity<UserDTO>(HttpStatus.NO_CONTENT);
 	}
-	
-	
-	
+
 	@GetMapping("/allUser")
 	@ApiOperation(value = "Afficher tous les utilisateurs", response = List.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des utilisateurs affiché avec succées"),
@@ -92,9 +88,7 @@ public class UserController {
 		}
 		return new ResponseEntity<List<UserDTO>>(HttpStatus.NO_CONTENT);
 	}
-	
-	
-	
+
 	@DeleteMapping("/deleteUser/{idUser}")
 	@ApiOperation(value = "Supprimer un utilisateur s'il existe", response = String.class)
 	@ApiResponse(code = 204, message = "L'utilisateur a été supprimé avec succées")
@@ -102,21 +96,30 @@ public class UserController {
 		userService.deleteUser(idUser);
 		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@PostMapping("/getallotherEmploye/{email}")
-	@ApiOperation(value = "Afficher tous les demandes d'avance sur salaire", response = List.class)
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des demandes affiché avec succées"),
-				@ApiResponse(code = 204, message = "Aucune demande pour avance sur salaire touvé"), })
+	@ApiOperation(value = "Afficher tous les autres employés", response = List.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "La liste des autres employés affiché avec succées"),
+			@ApiResponse(code = 204, message = "Aucune autre employé touvé"), })
 	public ResponseEntity<List<UserDTO>> getallotherEmploye(@PathVariable String email) {
 		List<User> users = userService.getallotherEmploye(email);
 		if (!CollectionUtils.isEmpty(users)) {
 			users.removeAll(Collections.singleton(null));
 			List<UserDTO> userssDtos = users.stream().map(user -> {
-					return mapUserToUserDTO(user);
+				return mapUserToUserDTO(user);
 			}).collect(Collectors.toList());
 			return new ResponseEntity<List<UserDTO>>(userssDtos, HttpStatus.OK);
 		}
 		return new ResponseEntity<List<UserDTO>>(HttpStatus.NO_CONTENT);
+	}
+
+	@PostMapping("/changepassword")
+	@ApiOperation(value = "Modifier la mo de passe", response = Passwordparser.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "La mot de passe a été modifiée"),
+			@ApiResponse(code = 304, message = "Erreur lors de la modification de mot de passe") })
+	public ResponseEntity<String> changeUserPassword(@RequestBody Passwordparser req) {
+		return userService.changeuserpassword(req.getoldpass(), req.getnewpassword(), req.getId());
+
 	}
 
 	private UserDTO mapUserToUserDTO(User user) {
@@ -130,11 +133,5 @@ public class UserController {
 		User user = mapper.map(userDTORequest, User.class);
 		return user;
 	}
-	@PostMapping("/changepassword")
-	public ResponseEntity<String> changeUserPassword(@RequestBody Passwordparser req) {
-		
-		return userService.changeuserpassword(req.getoldpass(),req.getnewpassword(), req.getId());
-		
-	}
-	
+
 }

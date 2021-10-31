@@ -1,22 +1,21 @@
 package com.smartup.p_rh.role;
 
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel (value = "Le role de l'utilisateur")
+@ApiModel(value = "Le role de l'utilisateur")
 public class RoleDTO implements Comparable<RoleDTO> {
-	
+
 	@ApiModelProperty(notes = "Id de role de l'utilisateur")
 	private Integer id;
-	
+
 	@ApiModelProperty(notes = "Le libelle de role")
 	private RoleName libelle;
-	
+
 	public RoleDTO() {
 		super();
 	}
-	
+
 	public RoleDTO(Integer id, RoleName libelle) {
 		super();
 		this.id = id;
@@ -43,6 +42,5 @@ public class RoleDTO implements Comparable<RoleDTO> {
 	public int compareTo(RoleDTO o) {
 		return libelle.compareTo(o.getLibelle());
 	}
-	
 
 }

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("DemandeCongeService")
 @Transactional
 public class DemandeCongeServiceImp implements IDemandeCongeService {
-	
+
 	@Autowired
 	private DemandeCongeRepository demandeCongeRepository;
 
@@ -40,6 +40,5 @@ public class DemandeCongeServiceImp implements IDemandeCongeService {
 	public List<DemandeConge> findByuserEmail(String email) {
 		return demandeCongeRepository.findDemByEmail(email);
 	}
-		
 
 }

@@ -9,12 +9,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.smartup.p_rh.message.response.ResponseMessageFile;
 
-
 @ControllerAdvice
 public class FileUploadExceptionAdvice extends ResponseEntityExceptionHandler {
 
-  @ExceptionHandler(MaxUploadSizeExceededException.class)
-  public ResponseEntity<ResponseMessageFile> handleMaxSizeException(MaxUploadSizeExceededException exc) {
-    return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessageFile("File too large!"));
-  }
+	@ExceptionHandler(MaxUploadSizeExceededException.class)
+	public ResponseEntity<ResponseMessageFile> handleMaxSizeException(MaxUploadSizeExceededException exc) {
+		return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessageFile("File too large!"));
+	}
 }

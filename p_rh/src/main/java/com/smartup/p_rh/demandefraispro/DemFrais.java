@@ -15,36 +15,35 @@ import com.smartup.p_rh.users.User;
 @Entity
 @Table(name = "employee_frais_dem")
 public class DemFrais {
-	
-	 @Id
-     @GeneratedValue(strategy = GenerationType.AUTO)
-	 @Column(name="employee_frais_dem_id")
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "employee_frais_dem_id")
 	private Integer id;
-	
+
 	@Column(name = "employee_frais_dem_montant")
 	private float montant;
-	
+
 	@Column(name = "employee_frais_dem_date_mission")
 	private Date dateMission;
-	
+
 	@Column(name = "employee_frais_dem_date")
 	private Date dateDem;
-	
+
 	@Column(name = "motif")
 	private String motif;
-	
-	@Column(name="statut")
+
+	@Column(name = "statut")
 	private String statut;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "users_login")
 	private User user;
-	
+
 	public DemFrais() {
 		super();
 	}
 
-	
 	public DemFrais(Integer id, float montant, Date dateMission, Date dateDem, String motif, String statut) {
 		super();
 		this.id = id;
@@ -54,10 +53,6 @@ public class DemFrais {
 		this.motif = motif;
 		this.statut = statut;
 	}
-
-
-
-
 
 	public Integer getId() {
 		return id;
@@ -87,7 +82,6 @@ public class DemFrais {
 		return dateDem;
 	}
 
-
 	public User getUser() {
 		return user;
 	}
@@ -100,7 +94,6 @@ public class DemFrais {
 		this.dateDem = dateDem;
 	}
 
-	
 	public String getMotif() {
 		return motif;
 	}
@@ -109,23 +102,18 @@ public class DemFrais {
 		this.motif = motif;
 	}
 
-	
-	
 	public String getStatut() {
 		return statut;
 	}
 
-
 	public void setStatut(String statut) {
 		this.statut = statut;
 	}
-
 
 	@Override
 	public String toString() {
 		return "DemFrais [id=" + id + ", montant=" + montant + ", dateMission=" + dateMission + ", dateDem=" + dateDem
 				+ ", user=" + user + "]";
 	}
-	
-	
+
 }

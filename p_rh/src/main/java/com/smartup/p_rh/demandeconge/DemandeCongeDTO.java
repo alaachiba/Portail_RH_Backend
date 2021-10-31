@@ -40,23 +40,17 @@ public class DemandeCongeDTO implements Comparable<DemandeCongeDTO> {
 
 	@ApiModelProperty(notes = "Le demandeur de congé")
 	private UserDTO user;
-	
+
 	@ApiModelProperty(notes = "Le type de congé")
 	private DemandeCongeTypeDTO demandeCongeType;
-
-
-	
-	
 
 	public DemandeCongeDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
 	public DemandeCongeDTO(Integer id, Date dateDeb, Date dateFin, Integer nbrJrs, String motif, Integer idRemplacant,
-			String tacheDele, String status, Date dateDem ) {
+			String tacheDele, String status, Date dateDem) {
 		super();
 		this.id = id;
 		this.dateDeb = dateDeb;
@@ -69,8 +63,6 @@ public class DemandeCongeDTO implements Comparable<DemandeCongeDTO> {
 		this.dateDem = dateDem;
 
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -140,12 +132,9 @@ public class DemandeCongeDTO implements Comparable<DemandeCongeDTO> {
 		return dateDem;
 	}
 
-
 	public void setDateDem(Date dateDem) {
 		this.dateDem = dateDem;
 	}
-
-
 
 	public UserDTO getUser() {
 		return user;
@@ -155,26 +144,18 @@ public class DemandeCongeDTO implements Comparable<DemandeCongeDTO> {
 		this.user = user;
 	}
 
-	
-
 	public DemandeCongeTypeDTO getDemandeCongeType() {
 		return demandeCongeType;
 	}
-
-
 
 	public void setDemandeCongeType(DemandeCongeTypeDTO demandeCongeType) {
 		this.demandeCongeType = demandeCongeType;
 	}
 
-
-
 	@Override
 	public int compareTo(DemandeCongeDTO o) {
-		return 	motif.compareToIgnoreCase(o.getMotif());
+		return motif.compareToIgnoreCase(o.getMotif());
 
 	}
-
-	
 
 }

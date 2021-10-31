@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service("UserService")
 @Transactional
 public class UserServiceImp implements IUserService {
@@ -37,7 +36,7 @@ public class UserServiceImp implements IUserService {
 
 	@Override
 	public void deleteUser(Integer id) {
-	 userDao.deleteById(id);
+		userDao.deleteById(id);
 	}
 
 	@Override
@@ -70,16 +69,15 @@ public class UserServiceImp implements IUserService {
 	public List<User> getallotherEmploye(String email) {
 		return userDao.getallotherEmploye(email);
 	}
-	public ResponseEntity<String> changeuserpassword(String password,String newpassword, Integer id) {
-		Optional<User> usr  = userDao.findById(id);
-		System.out.println(usr.get().getPwd());
-		System.out.println(password);
-		System.out.println(encoder.matches(password, usr.get().getPwd()));
-		if(encoder.matches(password, usr.get().getPwd())) {
-			userDao.changepassword(encoder.encode(newpassword),id);	
-			return new ResponseEntity<String>("password user updated successfully", HttpStatus.OK);
+
+	@Override
+	public ResponseEntity<String> changeuserpassword(String password, String newpassword, Integer id) {
+		Optional<User> usr = userDao.findById(id);
+		if (encoder.matches(password, usr.get().getPwd())) {
+			userDao.changepassword(encoder.encode(newpassword), id);
+			return new ResponseEntity<String>("La mot de passe a été modifié", HttpStatus.OK);
 		}
-	return new ResponseEntity<String>("error while updating password",HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<String>("Erreur lors de la modification de mot de passe", HttpStatus.BAD_REQUEST);
 	}
 
 }

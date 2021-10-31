@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service("DemandeFraisService")
 @Transactional
-public class DemFraisServiceImp  implements IDemFraisService {
-	
+public class DemFraisServiceImp implements IDemFraisService {
+
 	@Autowired
 	private DemFraisRepository demFraisDao;
 
@@ -27,7 +26,7 @@ public class DemFraisServiceImp  implements IDemFraisService {
 	@Override
 	public void deleteDem(Integer id) {
 		demFraisDao.deleteById(id);
-		
+
 	}
 
 	public boolean checkIfIdExists(Integer id) {

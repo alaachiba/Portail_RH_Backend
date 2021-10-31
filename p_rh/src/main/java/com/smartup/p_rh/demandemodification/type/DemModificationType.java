@@ -10,17 +10,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "employee_infos_rh_dem_type")
 public class DemModificationType {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "employee_infos_rh_dem_type_id")
 	private Integer id;
-	
-	
+
 	@Column(name = "employee_infos_rh_dem_type")
 	private String type;
-	
-	
+
 	public DemModificationType() {
 		super();
 	}
@@ -47,14 +45,9 @@ public class DemModificationType {
 		this.type = type;
 	}
 
-
 	@Override
 	public String toString() {
 		return "DemModificationType [id=" + id + ", type=" + type + "]";
 	}
-	
-	
-	
-	
 
 }

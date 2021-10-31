@@ -18,59 +18,44 @@ import com.smartup.p_rh.role.Role;
 
 @Entity
 @Table(name = "users")
-public class User{
+public class User {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "users_login")
 	private Integer idUser;
-	
-    //@NotBlank
-    //@Size(min=3, max = 50)
-	@Column(name= "users_nom")
+
+	@Column(name = "users_nom")
 	private String nom;
-	
-    //@NotBlank
-    //@Size(min=3, max = 50)
-	@Column(name= "users_prenom")
+
+	@Column(name = "users_prenom")
 	private String prenom;
-	
-    //@NotBlank
-	@Column(name= "employee_matricul")
+
+	@Column(name = "employee_matricul")
 	private Integer matricule;
-	
-    //@NaturalId
-    //@NotBlank
-    //@Size(max = 50)
-    //@Email
-	@Column(name= "users_email")
+
+	@Column(name = "users_email")
 	private String email;
-	
-    //@NotBlank
-	@Column(name= "users_status")
+
+	@Column(name = "users_status")
 	private String status;
-	
-	//@NotBlank
-    //@Size(min=6, max = 100)
-	@Column(name= "users_pwd")
+
+	@Column(name = "users_pwd")
 	private String pwd;
-	
-	@Column(name= "username")
+
+	@Column(name = "username")
 	private String username;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles", 
-    	joinColumns = @JoinColumn(name = "users_login"), 
-    	inverseJoinColumns = @JoinColumn(name = "id_role"))
-    private Set<Role> roles = new HashSet<>();
-	
+	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "users_login"), inverseJoinColumns = @JoinColumn(name = "id_role"))
+	private Set<Role> roles = new HashSet<>();
+
 	public User() {
 		super();
 	}
 
-	
-
-	public User(String nom, String prenom, Integer matricule, String email, String status, String pwd, String username) {
+	public User(String nom, String prenom, Integer matricule, String email, String status, String pwd,
+			String username) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -80,8 +65,6 @@ public class User{
 		this.pwd = pwd;
 		this.username = username;
 	}
-
-
 
 	public Integer getIdUser() {
 		return idUser;
@@ -147,19 +130,13 @@ public class User{
 		this.roles = roles;
 	}
 
-
-
 	public String getUsername() {
 		return username;
 	}
 
-
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -168,5 +145,4 @@ public class User{
 				+ roles + "]";
 	}
 
-	
 }

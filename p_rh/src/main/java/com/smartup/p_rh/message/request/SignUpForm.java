@@ -4,41 +4,42 @@ import java.util.Set;
 
 import javax.persistence.Column;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Modele de formulaire de signup")
 public class SignUpForm {
-	//@NotBlank
-    //@Size(min=3, max = 50)
-	@Column(name= "users_nom")
+
+	@ApiModelProperty(notes = "Le nom de l'utilisateur")
+	@Column(name = "users_nom")
 	private String nom;
-	
-    //@NotBlank
-    //@Size(min=3, max = 50)
-	@Column(name= "users_prenom")
+
+	@ApiModelProperty(notes = "Le prenom de l'utilisateur")
+	@Column(name = "users_prenom")
 	private String prenom;
-	
-    //@NotBlank
-	@Column(name= "employee_matricul")
+
+	@ApiModelProperty(notes = "Le matricule de l'utilisateur")
+	@Column(name = "employee_matricul")
 	private Integer matricule;
-	
-    //@NaturalId
-    //@NotBlank
-    //@Size(max = 50)
-    //@Email
-	@Column(name= "users_email")
+
+	@ApiModelProperty(notes = "L'adresse mail de l'utilisateur")
+	@Column(name = "users_email")
 	private String email;
-	
-	@Column(name= "username")
+
+	@ApiModelProperty(notes = "Le nom d'utilisateur")
+	@Column(name = "username")
 	private String username;
-	
-    //@NotBlank
-	@Column(name= "users_status")
+
+	@ApiModelProperty(notes = "Le status de l'utilisateur")
+	@Column(name = "users_status")
 	private String status;
-	
-	//@NotBlank
-    //@Size(min=6, max = 100)
-	@Column(name= "users_pwd")
+
+	@ApiModelProperty(notes = "La mot de passe de l'utilisateur")
+	@Column(name = "users_pwd")
 	private String pwd;
-    
-    private Set<String> role;
+
+	@ApiModelProperty(notes = "Le rôle de l'utilisateur")
+	private Set<String> role;
 
 	public String getNom() {
 		return nom;
@@ -103,6 +104,5 @@ public class SignUpForm {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	
+
 }

@@ -1,11 +1,16 @@
 package com.smartup.p_rh.message.request;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Modele de formulaire de login")
 public class LoginForm {
+
+	@ApiModelProperty(notes = "Le nom d'utilisateur")
 	private String username;
-	 
-    private String pwd;
 
-
+	@ApiModelProperty(notes = "La mot de passe")
+	private String pwd;
 
 	public String getUsername() {
 		return username;
@@ -22,5 +27,5 @@ public class LoginForm {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
- 
+
 }

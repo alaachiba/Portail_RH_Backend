@@ -11,13 +11,13 @@ public interface IDemAvanceService {
 	public void deleteDemAvance(Integer id);
 
 	public List<DemAvance> getAllDemAvance();
-	
+
 	public DemAvance findDemByIdU(Integer user);
-	
+
 	public DemAvance updateDem(DemAvance demandeAvance);
-	
+
 	List<DemAvance> findByuser(Integer user);
-	
+
 	public List<DemAvance> findByuserEmail(String email);
 
 }

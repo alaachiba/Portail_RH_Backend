@@ -17,45 +17,43 @@ import com.smartup.p_rh.users.User;
 @Entity
 @Table(name = "employee_conges_dem")
 public class DemandeConge {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "employee_conge_dem_id")
 	private Integer id;
-	
-	@Column(name= "employee_conges_dem_date_deb")
+
+	@Column(name = "employee_conges_dem_date_deb")
 	private Date dateDeb;
-	
-	@Column(name= "employee_conges_dem_date_fin")
+
+	@Column(name = "employee_conges_dem_date_fin")
 	private Date dateFin;
-	
-	@Column(name= "employee_conges_dem_nbr_jrs")
+
+	@Column(name = "employee_conges_dem_nbr_jrs")
 	private Integer nbrJrs;
-	
-	@Column(name= "employee_conges_dem_motif")
+
+	@Column(name = "employee_conges_dem_motif")
 	private String motif;
-	
-	@Column(name= "employee_id_remplacant")
+
+	@Column(name = "employee_id_remplacant")
 	private Integer idRemplacant;
-	
-	@Column(name= "employee_conges_dem_taches_dele")
+
+	@Column(name = "employee_conges_dem_taches_dele")
 	private String tacheDele;
-	
-	@Column(name= "employee_conges_dem_statut")
+
+	@Column(name = "employee_conges_dem_statut")
 	private String status;
-	
-	@Column(name= "employee_conges_dem_date")
+
+	@Column(name = "employee_conges_dem_date")
 	private Date dateDem;
-	
+
 	@ManyToOne
-	@JoinColumn(name= "users_login")
+	@JoinColumn(name = "users_login")
 	private User user;
-	
+
 	@ManyToOne
-	@JoinColumn(name= "employee_conges_dem_type_id")
+	@JoinColumn(name = "employee_conges_dem_type_id")
 	private DemandeCongeType demandeCongeType;
-	
-	
 
 	public DemandeConge() {
 		super();
@@ -137,15 +135,9 @@ public class DemandeConge {
 		return status;
 	}
 
-	
-
 	public Date getDateDem() {
 		return dateDem;
 	}
-
-	
-
-	
 
 	public void setStatus(String status) {
 		this.status = status;

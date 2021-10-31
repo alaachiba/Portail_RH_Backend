@@ -1,38 +1,27 @@
 package com.smartup.p_rh.congetype;
 
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel (value = "Modele de type de congé")
+@ApiModel(value = "Modele de type de congé")
 public class DemandeCongeTypeDTO implements Comparable<DemandeCongeTypeDTO> {
-	
- 
+
 	@ApiModelProperty(notes = "Id de type de congé")
-     private Integer id;
-	
+	private Integer id;
+
 	@ApiModelProperty(notes = "Le type de congé")
-	 private String type;
-	
-	/*@ApiModelProperty(value = "Le type de la demande conge")
-	private Collection<DemandeCongeDTO> demandeConge;*/
-	
-	
-	
+	private String type;
+
 	public DemandeCongeTypeDTO(Integer id, String type) {
 		super();
 		this.id = id;
 		this.type = type;
 	}
-	
-	
 
 	public DemandeCongeTypeDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -49,7 +38,6 @@ public class DemandeCongeTypeDTO implements Comparable<DemandeCongeTypeDTO> {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
 
 	@Override
 	public int compareTo(DemandeCongeTypeDTO o) {

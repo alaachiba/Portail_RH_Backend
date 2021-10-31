@@ -28,17 +28,16 @@ public class UserDTO {
 
 	@ApiModelProperty(notes = "L'adresse mail de l'utilisateur")
 	private String email;
-	
+
 	@ApiModelProperty(notes = "Le login de l'utilisateur")
 	private String username;
 
 	@ApiModelProperty(notes = "Le status de l'utilisateur")
 	private String status;
-	
+
 	@ApiModelProperty(notes = "Le role de l'utilisateur")
-	  private Set<Role> roles = new HashSet<>();
-	
-	
+	private Set<Role> roles = new HashSet<>();
+
 	public Integer getIdUser() {
 		return idUser;
 	}
@@ -95,9 +94,6 @@ public class UserDTO {
 		this.status = status;
 	}
 
-
-	
-
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -120,11 +116,5 @@ public class UserDTO {
 				+ matricule + ", email=" + email + ", username=" + username + ", status=" + status + ", roles=" + roles
 				+ "]";
 	}
-
-
-
-	
-	
-	
 
 }

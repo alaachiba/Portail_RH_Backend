@@ -12,16 +12,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "roles")
 public class Role {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_role")
 	private Integer id;
-	
-    @Enumerated(EnumType.STRING)
+
+	@Enumerated(EnumType.STRING)
 	@Column(name = "libelle_role")
 	private RoleName libelle;
-	
+
 	public Role() {
 		super();
 	}

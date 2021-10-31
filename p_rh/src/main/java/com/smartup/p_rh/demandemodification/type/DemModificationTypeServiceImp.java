@@ -8,13 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("DemandeModificationType")
 @Transactional
-public class DemModificationTypeServiceImp implements IdemModificationTypeService{
-	
+public class DemModificationTypeServiceImp implements IdemModificationTypeService {
+
 	@Autowired
 	private DemModificationTypeRepository demModifTypeDao;
 
 	@Override
-	 public DemModificationType saveDemModif(DemModificationType demModificationType) {
+	public DemModificationType saveDemModif(DemModificationType demModificationType) {
 		return demModifTypeDao.save(demModificationType);
 	}
 
@@ -25,12 +25,12 @@ public class DemModificationTypeServiceImp implements IdemModificationTypeServic
 
 	@Override
 	public void deleteDemModif(Integer id) {
-	   demModifTypeDao.deleteById(id);	
+		demModifTypeDao.deleteById(id);
 	}
 
 	@Override
 	public DemModificationType updateModifType(DemModificationType DemModificationType) {
-	return demModifTypeDao.save(DemModificationType);
+		return demModifTypeDao.save(DemModificationType);
 	}
 
 }

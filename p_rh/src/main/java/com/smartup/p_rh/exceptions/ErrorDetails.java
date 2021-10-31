@@ -6,7 +6,7 @@ public class ErrorDetails {
 	private Date timestamp;
 	private String message;
 	private String details;
-	
+
 	public ErrorDetails(Date timestamp, String message, String details) {
 		super();
 		this.timestamp = timestamp;
@@ -37,7 +37,5 @@ public class ErrorDetails {
 	public void setDetails(String details) {
 		this.details = details;
 	}
-	
-	
 
 }

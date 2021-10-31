@@ -13,74 +13,80 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.smartup.p_rh.users.User;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "files")
+@ApiModel(value = "Modele des documents administratifs")
 public class FileDB {
-  @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
-  @Column(name = "id")
-  private String id;
+	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	@ApiModelProperty(notes = "Id de document")
+	@Column(name = "id")
+	private String id;
 
-  @Column(name = "name")
-  private String name;
+	@ApiModelProperty(notes = "Le nom du document")
+	@Column(name = "name")
+	private String name;
 
-  @Column(name = "type")
-  private String type;
+	@ApiModelProperty(notes = "Le type du document")
+	@Column(name = "type")
+	private String type;
 
-  @Lob
-  @Column(name = "data")
-  private byte[] data;
-  
-  @ManyToOne
-  @JoinColumn(name = "users_login")
-  private User user;
+	@Lob
+	@Column(name = "data")
+	private byte[] data;
 
-  public FileDB() {
-  }
+	@ApiModelProperty(notes = "L'id de l'utilisateur")
+	@ManyToOne
+	@JoinColumn(name = "users_login")
+	private User user;
 
-  public FileDB(String name, String type, byte[] data) {
-    this.name = name;
-    this.type = type;
-    this.data = data;
-  }
+	public FileDB() {
+	}
 
-  public String getId() {
-    return id;
-  }
+	public FileDB(String name, String type, byte[] data) {
+		this.name = name;
+		this.type = type;
+		this.data = data;
+	}
 
-  public String getName() {
-    return name;
-  }
+	public String getId() {
+		return id;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public String getType() {
-    return type;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public void setType(String type) {
-    this.type = type;
-  }
+	public String getType() {
+		return type;
+	}
 
-  public byte[] getData() {
-    return data;
-  }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-  public void setData(byte[] data) {
-    this.data = data;
-  }
+	public byte[] getData() {
+		return data;
+	}
 
-  public User getUser() {
-	return user;
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 }
-
-  public void setUser(User user) {
-	this.user = user;
-}
-
-  
-}
-

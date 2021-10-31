@@ -29,12 +29,10 @@ public class JwtProvider {
 	private int jwtExpiration;
 
 	public String generateJwtToken(Authentication authentication) {
-
 		UserPrinciple userPrincipal = (UserPrinciple) authentication.getPrincipal();
-
 		return Jwts.builder().setSubject((userPrincipal.getUsername())).setIssuedAt(new Date())
 				.setExpiration(new Date((new Date()).getTime() + jwtExpiration))
-				.signWith(SignatureAlgorithm.HS512, jwtSecret).claim("roles",userPrincipal.getAuthorities()).compact();
+				.signWith(SignatureAlgorithm.HS512, jwtSecret).claim("roles", userPrincipal.getAuthorities()).compact();
 	}
 
 	public String getUserNameFromJwtToken(String token) {
@@ -56,7 +54,6 @@ public class JwtProvider {
 		} catch (IllegalArgumentException e) {
 			logger.error("JWT claims string is empty -> Message: {}", e);
 		}
-
 		return false;
 	}
 }
