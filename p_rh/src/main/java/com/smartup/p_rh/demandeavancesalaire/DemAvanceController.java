@@ -2,7 +2,20 @@ package com.smartup.p_rh.demandeavancesalaire;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +99,42 @@ public class DemAvanceController {
 		return new ResponseEntity<List<DemAvanceDTO>>(HttpStatus.NO_CONTENT);
 	}
 
+	public void mailling(String mail, String message) {
+		final String username = "smartup.hr.3s@gmail.com";
+		final String password = "159753Aa";
+		String fromEmail = "smartup.hr.3s@gmail.com";
+		Properties properties = new Properties();
+
+		properties.setProperty("mail.smtp.auth", "true");
+		properties.setProperty("mail.smtp.starttls.enable", "true");
+		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		properties.setProperty("mail.smtp.port", "587");
+		properties.setProperty("mail.smtp.user", username);
+		properties.setProperty("mail.smtp.password", password);
+		properties.setProperty("mail.smtp.localhost", "smtp.gmail.com");
+		Session session = Session.getInstance(properties, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+		MimeMessage msg = new MimeMessage(session);
+		try {
+			msg.setFrom(new InternetAddress(fromEmail));
+			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
+			msg.setSubject("Retour demande d'avance sur salaire");
+			Multipart emailContent = new MimeMultipart();
+			MimeBodyPart textBodyPart = new MimeBodyPart();
+			textBodyPart.setText(message);
+			emailContent.addBodyPart(textBodyPart);
+			msg.setContent(emailContent);
+			Transport.send(msg);
+			System.out.println("Sent message");
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@PutMapping("/updateDem")
 	@ApiOperation(value = "Modifier une demande d'avance sur salaire existante", response = DemAvanceDTO.class)
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "La demande d'avance sur salaire n'existe pas"),
@@ -97,6 +146,11 @@ public class DemAvanceController {
 			return new ResponseEntity<DemAvanceDTO>(HttpStatus.NOT_FOUND);
 		}
 		DemAvance demandeAvance = demAvanceService.updateDem(demRequest);
+		if (demRequest.getStatut().equals("Accepté")) {
+			mailling(demRequest.getUser().getEmail(), "Votre demande d'avance sur salaire a été accepté. Le montant est : " + demRequest.getMontant() + " DT");
+		} else if (demRequest.getStatut().equals("Réfusé")) {
+			mailling(demRequest.getUser().getEmail(), "Votre demande d'avance sur salaire a été refusé. La motif est : " + demRequest.getMotif());
+		}
 		if (demandeAvance != null) {
 			DemAvanceDTO demandeDTO = mapDemAvanceToDemAvanceDTO(demandeAvance);
 			return new ResponseEntity<DemAvanceDTO>(demandeDTO, HttpStatus.OK);

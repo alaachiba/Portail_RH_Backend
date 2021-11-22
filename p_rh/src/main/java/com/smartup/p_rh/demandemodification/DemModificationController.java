@@ -2,7 +2,20 @@ package com.smartup.p_rh.demandemodification;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +85,42 @@ public class DemModificationController {
 		DemModificationService.deleteDem(id);
 		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
 	}
+	
+	public void mailling(String mail, String message) {
+		final String username = "smartup.hr.3s@gmail.com";
+		final String password = "159753Aa";
+		String fromEmail = "smartup.hr.3s@gmail.com";
+		Properties properties = new Properties();
+
+		properties.setProperty("mail.smtp.auth", "true");
+		properties.setProperty("mail.smtp.starttls.enable", "true");
+		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		properties.setProperty("mail.smtp.port", "587");
+		properties.setProperty("mail.smtp.user", username);
+		properties.setProperty("mail.smtp.password", password);
+		properties.setProperty("mail.smtp.localhost", "smtp.gmail.com");
+		Session session = Session.getInstance(properties, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+		MimeMessage msg = new MimeMessage(session);
+		try {
+			msg.setFrom(new InternetAddress(fromEmail));
+			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
+			msg.setSubject("Retour demande de modification des informations personnelles");
+			Multipart emailContent = new MimeMultipart();
+			MimeBodyPart textBodyPart = new MimeBodyPart();
+			textBodyPart.setText(message);
+			emailContent.addBodyPart(textBodyPart);
+			msg.setContent(emailContent);
+			Transport.send(msg);
+			System.out.println("Sent message");
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@PutMapping("/updateDem")
 	@ApiOperation(value = "Modifier une demande de modification existante", response = DemModificationDTO.class)
@@ -84,6 +133,11 @@ public class DemModificationController {
 			return new ResponseEntity<DemModificationDTO>(HttpStatus.NOT_FOUND);
 		}
 		DemModification demModif = DemModificationService.updateDem(demRequest);
+		if (demRequest.getStatusDem().equals("Accepté")) {
+			mailling(demRequest.getUser().getEmail(), "Votre demande de modication des informations personnelles a été acceptée");
+		} else if (demRequest.getStatusDem().equals("Réfusé")) {
+			mailling(demRequest.getUser().getEmail(), "Votre demande de modication des informations personnelles a été refusée. La motif est: " + demRequest.getMotif());
+		}
 		if (demModif != null) {
 			DemModificationDTO demandeDTO = mapDemModificationToDemModificationDTO(demModif);
 			return new ResponseEntity<DemModificationDTO>(demandeDTO, HttpStatus.OK);
