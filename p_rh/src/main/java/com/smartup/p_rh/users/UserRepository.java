@@ -29,6 +29,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	List<User> getallotherEmploye(String email);
 
 	@Modifying
+	@Query("update User u set u.request_password = :request where u.email = :email")
+	public void sendPasswordRequest(String email, boolean request);
+
+	@Modifying
 	@Query("update User u set u.pwd = :password where u.id = :id")
 	public void changepassword(String password, Integer id);
 }

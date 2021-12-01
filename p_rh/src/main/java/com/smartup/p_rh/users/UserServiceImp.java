@@ -28,7 +28,7 @@ public class UserServiceImp implements IUserService {
 	public User updateUser(User user) {
 		return userDao.save(user);
 	}
-
+ 
 	@Override
 	public boolean checkIfIdExists(Integer id) {
 		return userDao.existsById(id);
@@ -78,6 +78,11 @@ public class UserServiceImp implements IUserService {
 			return new ResponseEntity<String>("La mot de passe a été modifié", HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("Erreur lors de la modification de mot de passe", HttpStatus.BAD_REQUEST);
+	}
+
+	@Override
+	public void passwordRequestUser(boolean request, String email) {
+		userDao.sendPasswordRequest(email, request);
 	}
 
 }

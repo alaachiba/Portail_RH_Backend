@@ -59,7 +59,7 @@ public class UserController {
 
 		return new ResponseEntity<UserDTO>(HttpStatus.NOT_MODIFIED);
 	}
-
+	
 	@GetMapping("/searchByEmail/{email}")
 	@ApiOperation(value = "Rechercher un utilisateur par son adresse mail", response = UserDTO.class)
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "L'utilisateur n'existe pas"),

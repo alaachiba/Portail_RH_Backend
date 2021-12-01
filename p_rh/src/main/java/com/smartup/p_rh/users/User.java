@@ -45,6 +45,9 @@ public class User {
 
 	@Column(name = "username")
 	private String username;
+	
+	@Column(name = "request_password")
+	private boolean request_password = false;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "users_login"), inverseJoinColumns = @JoinColumn(name = "id_role"))
@@ -136,6 +139,14 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public boolean isRequest_password() {
+		return request_password;
+	}
+
+	public void setRequest_password(boolean request_password) {
+		this.request_password = request_password;
 	}
 
 	@Override
